@@ -7,9 +7,9 @@ This is a simple blog application created using Next.js.
 ### Step 1: Configure Environment Variables
 
 1. Create a `.env` file in the root directory by copying `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
+    ```bash
+    cp .env.example .env
+    ```
 2. Fill in the required environment variables in the `.env` file.
 
 ### Step 2: Install Dependencies
