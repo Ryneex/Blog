@@ -1,12 +1,12 @@
 import { z } from "zod"
 
 export const signinValidation = z.object({
-    email: z.string().email(),
-    password: z.string().min(5).max(100),
+    email: z.string().toLowerCase().trim().email(),
+    password: z.string().toLowerCase().trim().min(5).max(100),
 })
 
 export const signupValidation = z.object({
-    name: z.string().min(5).max(100),
-    email: z.string().email(),
+    name: z.string().trim().min(5).max(100),
+    email: z.string().toLowerCase().trim().email(),
     password: z.string().min(5).max(100),
 })
