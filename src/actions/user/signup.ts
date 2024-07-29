@@ -8,14 +8,14 @@ import { z } from "zod"
 import argon from "argon2"
 import { auth } from "@/lib/auth"
 
-type IResponse = ErrorResponse | SuccessResponse<{ user: typeof signupValidation._output }>
+type IResponse = ErrorResponse | SuccessResponse<{ user: { id: string; name: string; email: string } }>
 
 export async function signup(data: z.infer<typeof signupValidation>): Promise<IResponse> {
     const validate = signupValidation.safeParse(data)
     if (validate.error) return sendError("Bad Request")
     try {
         const hash = await argon.hash(validate.data.password)
-        const user = await client.user.create({ data: { ...validate.data, password: hash } })
+        const user = await client.user.create({ data: { ...validate.data, password: hash }, select: { id: true, name: true, email: true } })
         await auth.createSession({ userId: user.id, expiresAt: new Date(Date.now() + 2592000000) })
         return { success: true, user }
     } catch (error) {
