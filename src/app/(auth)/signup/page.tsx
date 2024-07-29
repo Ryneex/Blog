@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query"
 import Link from "next/link"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { FaGithub } from "react-icons/fa"
 
 export default function Page() {
     const [serverSentError, setServerSentError] = useState("")
@@ -30,8 +30,8 @@ export default function Page() {
     const { mutate, isPending } = useMutation({
         mutationFn: signup,
         onSettled(data) {
-            if (!data!.success) {
-                setServerSentError(data!.message)
+            if (!data?.success) {
+                setServerSentError(data?.message || "Something wen't wrong")
             }
         },
     })
@@ -59,9 +59,21 @@ export default function Page() {
                     {errors.password && <span className="text-sm text-red-500">{errors.password.message}</span>}
                 </div>
                 {serverSentError && <Alert className="rounded-full" message={serverSentError} variant="error" />}
-                <Button isLoading={isPending} type="submit" className="h-9 rounded-full" color="primary">
-                    Sign up
-                </Button>
+                <div className="flex flex-col gap-3">
+                    <Button isLoading={isPending} type="submit" className="h-9 rounded-full" color="primary">
+                        Sign up
+                    </Button>
+                    <div className="flex items-center gap-3">
+                        <hr className="w-full" />
+                        <span className="text-center text-sm font-medium text-black/60">Or</span>
+                        <hr className="w-full" />
+                    </div>
+                    <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=Ov23li2yPpt6UtR9agpF">
+                        <Button startContent={<FaGithub size={18} />} isDisabled={isPending} type="button" className="h-9 w-full rounded-full border font-medium text-black/70" variant="light">
+                            Login with Github
+                        </Button>
+                    </a>
+                </div>
                 <Link className="mx-auto text-sm font-medium text-blue-500" href="/signin">
                     Already have an account?
                 </Link>
