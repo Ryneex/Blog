@@ -30,7 +30,13 @@ const config = {
             },
         },
     },
-    plugins: [require("tailwindcss-animate"), nextui()],
+    plugins: [
+        require("tailwindcss-animate"),
+        nextui(),
+        require("tailwindcss-fluid-type")({
+            settings: { prefix: "fluid-" },
+        }),
+    ],
 } satisfies Config
 
 export default config
