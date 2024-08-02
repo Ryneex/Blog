@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bn-container[data-color-scheme] {
+    --bn-colors-editor-background: transparent;
+}
