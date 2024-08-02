@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const blogValidation = z.object({
-    cover: z.custom<string>((e) => {
+    cover: z.custom<string | File>((e) => {
         const isUrl = z.string().url().trim().safeParse(e)
         if (isUrl.success) return isUrl.data
         if (e instanceof File) {
@@ -23,7 +23,7 @@ export const blogValidation = z.object({
 
 export const updateBlogValidation = z.object({
     id: z.string().trim(),
-    cover: z.custom<string>((e) => {
+    cover: z.custom<string | File>((e) => {
         const isUrl = z.string().url().trim().safeParse(e)
         if (isUrl.success) return isUrl.data
         if (e instanceof File) {
