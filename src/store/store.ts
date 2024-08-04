@@ -1,8 +1,8 @@
-import { user } from "@prisma/client"
+import { IPrivateUser } from "@/types/user"
 import { proxy } from "valtio"
 
 type store = {
-    user?: Pick<user, "id" | "name" | "email" | "avatar_url">
+    user?: IPrivateUser
 }
 
 export const store = proxy<store>({
