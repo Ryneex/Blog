@@ -4,15 +4,7 @@ import type { Config } from "tailwindcss"
 const config = {
     darkMode: ["class"],
     content: ["./src/**/*.{ts,tsx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
-    prefix: "",
     theme: {
-        container: {
-            center: true,
-            padding: "2rem",
-            screens: {
-                "2xl": "1400px",
-            },
-        },
         extend: {
             keyframes: {
                 "accordion-down": {
@@ -29,6 +21,9 @@ const config = {
                 "accordion-up": "accordion-up 0.2s ease-out",
             },
         },
+    },
+    corePlugins: {
+        container: false,
     },
     plugins: [
         require("tailwindcss-animate"),
