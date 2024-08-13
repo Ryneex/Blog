@@ -15,7 +15,7 @@ export const blogValidation = z.object({
         try {
             JSON.parse(value)
             return true
-        } catch (_) {
+        } catch (error) {
             return false
         }
     }),
@@ -37,7 +37,7 @@ export const updateBlogValidation = z.object({
         try {
             JSON.parse(value)
             return true
-        } catch (_) {
+        } catch (error) {
             return false
         }
     }),
