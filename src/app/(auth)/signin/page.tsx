@@ -1,6 +1,6 @@
 "use client"
 
-import { signin } from "@/actions/user/signin"
+import { signin } from "@/actions/user/auth/signin"
 import Alert from "@/components/Alert"
 import { Input } from "@/components/shadcn/ui/input"
 import { signinValidation } from "@/validations/user"
