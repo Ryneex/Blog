@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "@nextui-org/react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export default function ErrorComponent({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary(): void }) {
