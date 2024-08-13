@@ -41,7 +41,10 @@ export default function Editor({ initialData }: { initialData?: blog }) {
         form.append("content", validate.data.content)
         initialData && form.append("id", initialData.id)
         const response = await callActionWithToast(initialData ? updateBlog(form) : createBlog(form), "Blog has been saved")
-        if (response.success) router.push(`/blog/${response.blog.id}`)
+        if (response.success) {
+            router.refresh()
+            router.push(`/blog/${response.blog.id}`)
+        }
     }
 
     useEffect(() => {
