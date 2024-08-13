@@ -5,3 +5,7 @@
 .bn-container[data-color-scheme] {
     --bn-colors-editor-background: transparent;
 }
+
+.container {
+    @apply mx-auto w-full max-w-[1400px] px-[1rem] sm:px-[2rem];
+}
