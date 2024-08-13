@@ -16,13 +16,10 @@ export default function Navbar({ user }: { user?: IPrivateUser }) {
     return (
         <div className="shrink-0 border-b border-slate-300">
             <nav className="container flex h-16 items-center justify-between">
-                <div className="flex gap-5">
-                    <Link href="/" className="flex items-center gap-1 text-xl font-medium text-blue-800">
-                        <RiBloggerLine size={28} />
-                        Blog
-                    </Link>
-                    <Input type="text" placeholder="Search..." labelPlacement="outside" size="sm" startContent={<FaSearch className="mx-1" />} />
-                </div>
+                <Link href="/" className="flex items-center gap-1 text-xl font-medium text-blue-800">
+                    <RiBloggerLine size={28} />
+                    Blog
+                </Link>
                 {!user ? (
                     <div className="flex gap-3">
                         <Link href="/signin">
