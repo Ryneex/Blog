@@ -20,7 +20,7 @@ export default function EditorText({
     const [value, setValue] = useState(initialValue || "")
     const [isEditable, setIsEditable] = useState(false)
     const textarea = useRef<HTMLTextAreaElement>(null)
-    const style = variant == "heading" ? "text-5xl/normal font-bold" : "text-base/normal"
+    const style = variant == "heading" ? "fluid-text-5xl/normal font-bold" : "text-base/normal"
     return (
         <div className={twMerge("px-[54px] py-[3px] text-[#3f3f3f]", style, inter.className, className)}>
             {isEditable ? (
