@@ -1,1 +1,4 @@
-export { NotFound as default } from "@/components/NotFound"
+import { NotFound } from "@/components/NotFound"
+export default function page() {
+    return <NotFound className="min-h-screen" />
+}
