@@ -1,8 +1,8 @@
 "use client"
 
-import { Avatar, Button, Divider, Input, Listbox, ListboxItem, useDisclosure, User } from "@nextui-org/react"
+import { Avatar, Button, Divider, Listbox, ListboxItem, useDisclosure, User } from "@nextui-org/react"
 import Link from "next/link"
-import { FaPlus, FaSearch } from "react-icons/fa"
+import { FaPlus } from "react-icons/fa"
 import { RiBloggerLine } from "react-icons/ri"
 import { MdLogout } from "react-icons/md"
 import { FiUser } from "react-icons/fi"
