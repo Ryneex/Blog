@@ -42,6 +42,7 @@ export default function EditorText({
                 />
             ) : (
                 <div
+                    className="break-words"
                     onClick={() => {
                         if (isPreview) return
                         setIsEditable(true)
