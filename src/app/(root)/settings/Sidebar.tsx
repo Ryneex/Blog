@@ -24,9 +24,9 @@ export default function Sidebar() {
     ]
 
     return (
-        <div className="w-full max-w-[230px] shrink-0">
-            <h1 className="mb-2 text-lg font-medium">Settings</h1>
-            <Listbox className="text-black/70" aria-label="Settings tab">
+        <div className="w-full shrink-0 sm:max-w-[180px] lg:max-w-[230px]">
+            <h1 className="mb-2 hidden text-lg font-medium sm:block">Settings</h1>
+            <Listbox className="hidden text-black/70 sm:block" aria-label="Settings tab">
                 {links.map((e, i) => (
                     <ListboxItem
                         startContent={<e.icon className="mb-0.5" />}
@@ -41,6 +41,12 @@ export default function Sidebar() {
                     </ListboxItem>
                 ))}
             </Listbox>
+            {/* Visible on smaller device */}
+            <div className="mb-2 flex w-full gap-5 border-b pb-2 sm:hidden">
+                {links.map((e, i) => (
+                    <e.icon key={i} size={32} className={cn("rounded-md bg-gray-200 p-1.5 text-gray-500", pathname === e.href && "bg-blue-100 text-blue-600")} />
+                ))}
+            </div>
         </div>
     )
 }

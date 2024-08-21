@@ -42,8 +42,8 @@ export default function AccountSettings({ userData }: { userData: IPrivateUser }
     }
 
     return (
-        <div className="w-full overflow-auto px-5">
-            <Breadcrumbs>
+        <div className="w-full overflow-auto">
+            <Breadcrumbs className="hidden sm:block">
                 <BreadcrumbItem>Settings</BreadcrumbItem>
                 <BreadcrumbItem>Account</BreadcrumbItem>
             </Breadcrumbs>
