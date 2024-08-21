@@ -4,6 +4,7 @@
     "extends": ["next/core-web-vitals", "plugin:@tanstack/eslint-plugin-query/recommended"],
     "rules": {
         "@next/next/no-img-element": "off",
-        "@typescript-eslint/no-unused-vars": ["error", { "caughtErrorsIgnorePattern": "error" }]
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "_", "caughtErrorsIgnorePattern": "error" }]
     }
 }
