@@ -2,9 +2,9 @@ import { IPrivateUser } from "@/types/user"
 import { proxy } from "valtio"
 
 type store = {
-    user?: IPrivateUser
+    user: IPrivateUser | null
 }
 
 export const store = proxy<store>({
-    user: undefined,
+    user: null,
 })

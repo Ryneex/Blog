@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover"
 import { GearIcon } from "@radix-ui/react-icons"
 import { IPrivateUser } from "@/types/user"
 
-export default function Navbar({ user }: { user?: IPrivateUser }) {
+export default function Navbar({ user }: { user: IPrivateUser | null }) {
     return (
         <div className="shrink-0 border-b border-slate-300">
             <nav className="container flex h-16 items-center justify-between">
