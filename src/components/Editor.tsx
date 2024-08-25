@@ -42,8 +42,8 @@ export default function Editor({ initialData }: { initialData?: blog }) {
         initialData && form.append("id", initialData.id)
         const response = await callActionWithToast(initialData ? updateBlog(form) : createBlog(form), "Blog has been saved")
         if (response.success) {
-            router.refresh()
             router.push(`/blog/${response.blog.id}`)
+            router.refresh()
         }
     }
 
