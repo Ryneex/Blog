@@ -10,7 +10,7 @@ export async function getCoverUrl(cover: string | File, blogId: string): Promise
     if (typeof cover === "string") return { success: true, url: cover }
 
     const res: ITypeGetCoverUrl = await new Promise(async (res) => {
-        const stream = cloudinary.v2.uploader.upload_stream({ resource_type: "image", folder: "/blog/cover", public_id: blogId }, (err, data) => {
+        const stream = cloudinary.v2.uploader.upload_stream({ resource_type: "image", folder: "/blogApp/blogCover", public_id: blogId }, (err, data) => {
             if (err) return res(sendError(err.message))
             if (data) return res({ success: true, url: data.secure_url })
             res(sendError("something went wrong"))
