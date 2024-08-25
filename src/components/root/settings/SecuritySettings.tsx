@@ -7,7 +7,7 @@ import { DateTime } from "luxon"
 import { deleteOtherSessions } from "@/actions/user/auth/deleteOtherSessions"
 import { useRouter } from "next/navigation"
 
-export default function SecuritySettings({ sessions, currentSessionId }: { sessions: session[]; currentSessionId: string }) {
+export default function SecuritySettings({ sessions }: { sessions: (Omit<session, "id"> & { isCurrent: boolean })[] }) {
     const router = useRouter()
     return (
         <div className="w-full">
@@ -25,7 +25,7 @@ export default function SecuritySettings({ sessions, currentSessionId }: { sessi
                             <div className="space-y-0.5">
                                 <div className="flex items-center gap-2">
                                     <span className="font-medium text-black/70">{e.info.os}</span>
-                                    {currentSessionId === e.id && (
+                                    {e.isCurrent && (
                                         <Chip size="sm" color="primary" variant="flat" className="!h-fit p-0.5">
                                             Current
                                         </Chip>
