@@ -1,10 +1,9 @@
 import AccountSettings from "@/components/root/settings/AccountSettings"
+import { ExcludeKeys } from "@/helpers/excludeKeys"
 import { getCurrentUser } from "@/helpers/getCurrentUser"
-import { SelectKeys } from "@/helpers/selectKeys"
-import { redirect } from "next/navigation"
 
 export default async function page() {
-    const res = await getCurrentUser()
-    if (!res.success) redirect("/")
-    return <AccountSettings userData={SelectKeys(res.user, ["id", "name", "email", "avatar_url", "bio"])} />
+    const { user } = await getCurrentUser()
+    if (!user) return
+    return <AccountSettings userData={ExcludeKeys(user!, ["password"])} />
 }
