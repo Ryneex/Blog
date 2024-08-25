@@ -1,4 +1,4 @@
-export function sendError(e: unknown, errHandler?: (err: Error) => string | undefined): { success: false; message: string } {
+export function sendError(e?: unknown, errHandler?: (err: Error) => string | undefined): { success: false; message: string } {
     if (typeof e === "string") return { success: false, message: e }
     if (e instanceof Error) {
         const message = errHandler && errHandler(e)
