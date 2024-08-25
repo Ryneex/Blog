@@ -2,7 +2,7 @@
 
 import { Button, Input } from "@nextui-org/react"
 import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+import { useState } from "react"
 import { FaSearch } from "react-icons/fa"
 
 export default function SearchBar() {
