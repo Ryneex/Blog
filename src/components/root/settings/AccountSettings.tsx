@@ -47,7 +47,7 @@ export default function AccountSettings({ userData }: { userData: IPrivateUser }
                 <BreadcrumbItem>Settings</BreadcrumbItem>
                 <BreadcrumbItem>Account</BreadcrumbItem>
             </Breadcrumbs>
-            <h1 className="mt-3 font-medium text-black/70 text-2xl">Account Settings</h1>
+            <h1 className="mt-3 text-2xl font-medium text-black/70">Account Settings</h1>
             <div className="mt-3 flex flex-col gap-5 sm:mt-5">
                 <div className="w-fit space-y-1">
                     <span className="text-sm font-medium text-black/80">Profile Avatar</span>
