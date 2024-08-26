@@ -22,16 +22,16 @@ export default function Navbar({ user }: { user: IPrivateUser | null }) {
                 </Link>
                 {!user ? (
                     <div className="flex gap-3">
-                        <Link href="/signin">
+                        <a href="/signin">
                             <Button className="h-9 rounded-full" variant="flat">
                                 Sign in
                             </Button>
-                        </Link>
-                        <Link href="/signup">
+                        </a>
+                        <a href="/signup">
                             <Button className="h-9 rounded-full" color="primary">
                                 Sign up
                             </Button>
-                        </Link>
+                        </a>
                     </div>
                 ) : (
                     <div className="flex items-center gap-3">
