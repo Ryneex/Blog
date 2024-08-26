@@ -15,8 +15,20 @@ export default function SecuritySettings({ sessions }: { sessions: (Omit<session
                 <BreadcrumbItem>Settings</BreadcrumbItem>
                 <BreadcrumbItem>Account</BreadcrumbItem>
             </Breadcrumbs>
-            <h1 className="mt-2 font-medium text-black/70 fluid-text-lg">Security</h1>
-            <div className="flex flex-col gap-5 py-5">
+            <div className="mt-3 flex items-center justify-between">
+                <h1 className="text-2xl font-medium text-black/70">Security</h1>
+                <Button
+                    onClick={async () => {
+                        await deleteOtherSessions()
+                        router.refresh()
+                    }}
+                    className="h-9 rounded-full bg-red-500"
+                    color="danger"
+                >
+                    Delete other sessions
+                </Button>
+            </div>
+            <div className="flex flex-col gap-5 py-3">
                 {sessions.map((e, i) => (
                     <div key={i} className="space-y-2 rounded-xl border p-5">
                         <div className="fluid-text-md font-medium">{DateTime.fromJSDate(e.createdAt).toFormat("DDD")}</div>
@@ -42,16 +54,6 @@ export default function SecuritySettings({ sessions }: { sessions: (Omit<session
                     </div>
                 ))}
             </div>
-            <Button
-                onClick={async () => {
-                    await deleteOtherSessions()
-                    router.refresh()
-                }}
-                className="ml-auto block h-9 rounded-full bg-red-500"
-                color="danger"
-            >
-                Delete other sessions
-            </Button>
         </div>
     )
 }
