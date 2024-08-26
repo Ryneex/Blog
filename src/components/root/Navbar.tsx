@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover"
 import { GearIcon } from "@radix-ui/react-icons"
 import { IPrivateUser } from "@/types/user"
+import { getColorBasedOnText } from "@/lib/utils"
 
 export default function Navbar({ user }: { user: IPrivateUser | null }) {
     return (
@@ -52,13 +53,29 @@ function ProfilePopover({ user }: { user: IPrivateUser }) {
     return (
         <Popover isOpen={isOpen} onOpenChange={onOpenChange} classNames={{ base: "sm:w-72" }} placement="bottom-end">
             <PopoverTrigger>
-                <Avatar isBordered className="!size-8 cursor-pointer" src={user.avatar_url ? user.avatar_url : undefined} name={user.name} />
+                <Avatar
+                    isBordered
+                    style={{ backgroundColor: !user.avatar_url ? getColorBasedOnText(user.name) : undefined }}
+                    className="!size-8 cursor-pointer text-white"
+                    src={user.avatar_url ? user.avatar_url : undefined}
+                    name={user.name.slice(0, 2)}
+                />
             </PopoverTrigger>
             <PopoverContent className="p-3">
-                <User className="mr-auto mt-1" name={user.name} description={user.email} avatarProps={{ src: user.avatar_url ? user.avatar_url : undefined }} />
+                <User
+                    className="mr-auto mt-1"
+                    name={user.name}
+                    description={user.email}
+                    avatarProps={{
+                        src: user.avatar_url ? user.avatar_url : undefined,
+                        name: user.name.slice(0, 2),
+                        className: "text-white",
+                        style: { backgroundColor: !user.avatar_url ? getColorBasedOnText(user.name) : undefined },
+                    }}
+                />
                 <Divider className="my-4" />
                 <Listbox aria-label="Actions" variant="flat">
-                    <ListboxItem as={Link} href={`/user/${user.id}`} startContent={<FiUser className="mb-0.5" />} key="Profile">
+                    <ListboxItem onClick={onClose} as={Link} href={`/user/${user.id}`} startContent={<FiUser className="mb-0.5" />} key="Profile">
                         Your Profile
                     </ListboxItem>
                     <ListboxItem onClick={onClose} href="/settings" as={Link} showDivider startContent={<GearIcon className="mb-0.5" />} key="Settings">
