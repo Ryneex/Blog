@@ -15,7 +15,7 @@ import { IPrivateUser } from "@/types/user"
 export default function Navbar({ user }: { user: IPrivateUser | null }) {
     return (
         <div className="shrink-0 border-b border-slate-300">
-            <nav className="container flex h-16 items-center justify-between">
+            <nav className="container flex h-12 items-center justify-between sm:h-16">
                 <Link href="/" className="flex items-center gap-1 text-xl font-medium text-blue-800">
                     <RiBloggerLine size={28} />
                     Blog
