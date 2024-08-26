@@ -48,12 +48,12 @@ export default function AccountSettings({ userData }: { userData: IPrivateUser }
                 <BreadcrumbItem>Account</BreadcrumbItem>
             </Breadcrumbs>
             <h1 className="mt-2 font-medium text-black/70 fluid-text-lg">Account Settings</h1>
-            <div className="mt-10 flex flex-col gap-5">
+            <div className="mt-3 flex flex-col gap-5 sm:mt-5">
                 <div className="w-fit space-y-1">
                     <span className="text-sm font-medium text-black/80">Profile Avatar</span>
                     <AvatarUpload url={userData.avatar_url} name={userData.name} />
                 </div>
-                <div className="flex gap-7">
+                <div className="flex gap-3 sm:gap-7">
                     <div className="w-full space-y-1">
                         <span className="text-sm font-medium text-black/80">Name</span>
                         <Input onChange={(e) => setName(e.target.value)} value={name} className="border-zinc-300 shadow-none" />
