@@ -1,5 +1,5 @@
-import Navbar from "@/components/Navbar"
-import RootLayoutProvider from "@/components/RootLayoutProvider"
+import Navbar from "@/components/root/Navbar"
+import RootLayoutProvider from "@/components/root/RootLayoutProvider"
 import { getCurrentUser } from "@/helpers/getCurrentUser"
 
 export default async function layout({ children }: { children: React.ReactNode }) {
