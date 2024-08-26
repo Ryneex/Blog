@@ -1,13 +1,13 @@
 "use client"
 
 import { Button, Input } from "@nextui-org/react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { FaSearch } from "react-icons/fa"
 
 export default function SearchBar() {
     const router = useRouter()
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState(useSearchParams().get("q") ?? "")
     const submit = () => router.push(`/?q=${input}`)
 
     return (
