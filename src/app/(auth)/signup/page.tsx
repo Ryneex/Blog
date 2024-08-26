@@ -31,14 +31,15 @@ export default function Page() {
         mutationFn: signup,
         onSettled(data) {
             if (!data?.success) {
-                setServerSentError(data?.message || "Something wen't wrong")
+                return setServerSentError(data?.message || "Something wen't wrong")
             }
+            window.location.href = "/"
         },
     })
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-50">
-            <form onSubmit={handleSubmit((e) => mutate(e))} className="flex h-full w-full max-w-md flex-col gap-5 rounded-3xl border bg-white px-10 py-8 shadow-md">
+            <form onSubmit={handleSubmit((e) => mutate(e))} className="flex h-full w-full max-w-md flex-col gap-5 px-5 py-3 sm:rounded-3xl sm:border sm:bg-white sm:px-10 sm:py-8 sm:shadow-md">
                 <h1 className="mx-auto text-2xl font-bold">Sign up</h1>
                 {/* Name */}
                 <div>
