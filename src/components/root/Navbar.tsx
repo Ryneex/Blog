@@ -58,7 +58,7 @@ function ProfilePopover({ user }: { user: IPrivateUser }) {
                 <User className="mr-auto mt-1" name={user.name} description={user.email} avatarProps={{ src: user.avatar_url ? user.avatar_url : undefined }} />
                 <Divider className="my-4" />
                 <Listbox aria-label="Actions" variant="flat">
-                    <ListboxItem startContent={<FiUser className="mb-0.5" />} key="Profile">
+                    <ListboxItem as={Link} href={`/user/${user.id}`} startContent={<FiUser className="mb-0.5" />} key="Profile">
                         Your Profile
                     </ListboxItem>
                     <ListboxItem onClick={onClose} href="/settings" as={Link} showDivider startContent={<GearIcon className="mb-0.5" />} key="Settings">
