@@ -26,7 +26,6 @@ const config = {
         container: false,
     },
     plugins: [
-        require("tailwindcss-animate"),
         nextui(),
         require("tailwindcss-fluid-type")({
             settings: { prefix: "fluid-" },
