@@ -44,7 +44,9 @@ export default function Sidebar() {
             {/* Visible on smaller device */}
             <div className="mb-2 flex w-full gap-5 border-b pb-2 sm:hidden">
                 {links.map((e, i) => (
-                    <e.icon key={i} size={32} className={cn("rounded-md bg-gray-200 p-1.5 text-gray-500", pathname === e.href && "bg-blue-100 text-blue-600")} />
+                    <Link key={i} className={cn("rounded-md bg-gray-200 p-1.5 text-gray-500", pathname === e.href && "bg-blue-100 text-blue-600")} href={e.href}>
+                        <e.icon size={20} />
+                    </Link>
                 ))}
             </div>
         </div>
