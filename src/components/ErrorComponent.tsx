@@ -2,8 +2,10 @@
 import { Button } from "@nextui-org/react"
 import { useRouter } from "next/navigation"
 
-export default function ErrorComponent({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary(): void }) {
+export default function ErrorComponent({ error, resetErrorBoundary }: { error?: Error | string; resetErrorBoundary?: () => void }) {
     const router = useRouter()
+    if (error instanceof Error) {
+    }
     return (
         <div className="grid h-full w-full place-items-center">
             <div className="flex max-w-sm flex-col items-center text-center">
@@ -13,7 +15,7 @@ export default function ErrorComponent({ error, resetErrorBoundary }: { error: E
                     </svg>
                 </p>
                 <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl">Something wen&apos;t wrong</h1>
-                <p className="mt-4 text-gray-500 dark:text-gray-400">{error.message}</p>
+                <p className="mt-4 text-gray-500 dark:text-gray-400">{error instanceof Error ? error.message : error}</p>
 
                 <div className="mt-6 flex w-full shrink-0 items-center gap-x-3 sm:w-auto">
                     <Button
