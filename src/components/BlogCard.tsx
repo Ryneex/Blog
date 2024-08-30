@@ -1,11 +1,29 @@
+"use client"
+
 import { IBlogCardInfo } from "@/types/blog"
 import { DateTime } from "luxon"
 import Link from "next/link"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 
-export default function BlogCard({ blog }: { blog: IBlogCardInfo }) {
+type IProp = {
+    blog: IBlogCardInfo
+    onSeen?: () => void
+}
+export default function BlogCard({ blog, onSeen }: IProp) {
+    const blogRef = useRef<HTMLDivElement>(null)
+
+    // callback function is called when blog is visible on screen
+    useEffect(() => {
+        const blogDiv = blogRef.current
+        if (!onSeen || !blogDiv) return
+        const observer = new IntersectionObserver((entries) => entries[0].isIntersecting && onSeen())
+        observer.observe(blogRef.current)
+
+        return () => observer.unobserve(blogDiv)
+    }, [onSeen])
+
     return (
-        <div className="flex flex-col rounded-lg border bg-white shadow-sm">
+        <div ref={blogRef} className="flex flex-col rounded-lg border bg-white shadow-sm">
             <Link href={`/blog/${blog.id}`} className="aspect-video w-full overflow-hidden rounded-lg">
                 <img className="h-full w-full object-cover duration-300 hover:scale-110" src={blog.cover_url} alt="" />
             </Link>
