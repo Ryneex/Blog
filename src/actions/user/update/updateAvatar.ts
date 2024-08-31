@@ -25,7 +25,7 @@ export async function updateAvatar(formData: FormData) {
             stream.end(Buffer.from(await validate.data.arrayBuffer()))
         })
         if (!uploadResponse.success) return uploadResponse
-        await client.user.update({ where: { id: user.id }, data: { avatar_url: uploadResponse.url } })
+        await client.users.update({ where: { id: user.id }, data: { avatarUrl: uploadResponse.url } })
         return { success: true as const, message: "Avatar updated" }
     } catch (error) {
         return sendError("Something wen't wrong")

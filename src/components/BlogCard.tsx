@@ -25,7 +25,7 @@ export default function BlogCard({ blog, onSeen }: IProp) {
     return (
         <div ref={blogRef} className="flex flex-col rounded-lg border bg-white shadow-sm">
             <Link href={`/blog/${blog.id}`} className="aspect-video w-full overflow-hidden rounded-lg">
-                <img className="h-full w-full object-cover duration-300 hover:scale-110" src={blog.cover_url} alt="" />
+                <img className="h-full w-full object-cover duration-300 hover:scale-110" src={blog.coverUrl} alt="" />
             </Link>
             <div className="p-3 !pt-2 text-black/80 sm:p-5">
                 <Link href={`/user/${blog.author.id}`} className="text-xs font-medium text-black/60">

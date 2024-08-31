@@ -9,5 +9,5 @@ export function getSessionInfo(ip: string) {
         browser: { name: browser, version: browser_version },
         os: { name: os },
     } = userAgent({ headers: headers() })
-    return { os, browser, browser_version, location }
+    return { os, browser, browserVersion: browser_version, location }
 }

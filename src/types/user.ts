@@ -1,5 +1,5 @@
-import { user } from "@prisma/client"
+import { users } from "@prisma/client"
 
-export type IBaseUser = Pick<user, "id" | "name" | "avatar_url">
-export type IPublicUser = IBaseUser & Pick<user, "bio">
-export type IPrivateUser = IBaseUser & Pick<user, "email" | "bio">
+export type IBaseUser = Pick<users, "id" | "name" | "avatarUrl">
+export type IPublicUser = IBaseUser & Pick<users, "bio">
+export type IPrivateUser = IBaseUser & Pick<users, "email" | "bio">

@@ -12,13 +12,13 @@ import { Button } from "@nextui-org/react"
 import { blogValidation } from "@/validations/blog"
 import { toast } from "sonner"
 import { createBlog } from "@/actions/blog/createBlog"
-import { blog } from "@prisma/client"
+import { blogs } from "@prisma/client"
 import { updateBlog } from "@/actions/blog/updateBlog"
 import { useRouter } from "next/navigation"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 
-export default function Editor({ initialData }: { initialData?: blog }) {
-    const [cover, setCover] = useState<string | File | undefined>(initialData?.cover_url)
+export default function Editor({ initialData }: { initialData?: blogs }) {
+    const [cover, setCover] = useState<string | File | undefined>(initialData?.coverUrl)
     const [title, setTitle] = useState(initialData?.title || "")
     const [description, setDescription] = useState(initialData?.description || "")
     const [content, setContent] = useState<PartialBlock[]>([])
@@ -58,7 +58,7 @@ export default function Editor({ initialData }: { initialData?: blog }) {
                 <Button onClick={publish} className="absolute right-2 top-2 z-10 h-9 rounded-full" color="primary">
                     {initialData ? "Save" : "Publish"}
                 </Button>
-                <CoverImage onValueChange={setCover} src={initialData?.cover_url} />
+                <CoverImage onValueChange={setCover} src={initialData?.coverUrl} />
             </div>
             <EditorText initialValue={title} onValueChange={setTitle} variant="heading" />
             <EditorText initialValue={description} onValueChange={setDescription} variant="paragraph" />

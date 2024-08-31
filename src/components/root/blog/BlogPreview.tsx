@@ -7,7 +7,7 @@ import { BlockNoteView } from "@blocknote/mantine"
 import { ErrorBoundary } from "react-error-boundary"
 import { useCreateBlockNote } from "@blocknote/react"
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react"
-import { blog } from "@prisma/client"
+import { blogs } from "@prisma/client"
 import { DateTime } from "luxon"
 import { useSnapshot } from "valtio"
 import Alert from "@/components/Alert"
@@ -20,7 +20,7 @@ import { deleteBlog } from "@/actions/blog/deleteBlog"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
-export default function BlogPreview({ data }: { data: blog & { author: IBaseUser } }) {
+export default function BlogPreview({ data }: { data: blogs & { author: IBaseUser } }) {
     const { user } = useSnapshot(store)
     const router = useRouter()
 
@@ -31,9 +31,9 @@ export default function BlogPreview({ data }: { data: blog & { author: IBaseUser
                     className="mb-3 mr-auto"
                     name={data.author.name}
                     description={DateTime.fromJSDate(data.createdAt).toFormat("dd LLL yyyy")}
-                    avatarProps={{ src: data.author.avatar_url ?? undefined }}
+                    avatarProps={{ src: data.author.avatarUrl ?? undefined }}
                 />
-                {user?.id === data.author_id && (
+                {user?.id === data.authorId && (
                     <div>
                         <Dropdown placement="bottom-end">
                             <DropdownTrigger>
@@ -63,7 +63,7 @@ export default function BlogPreview({ data }: { data: blog & { author: IBaseUser
                 )}
             </div>
             <div className="relative aspect-[10/4] shrink-0 overflow-hidden">
-                <CoverImage isPreview src={data.cover_url} />
+                <CoverImage isPreview src={data.coverUrl} />
             </div>
             <EditorText className="px-1" isPreview initialValue={data.title} variant="heading" />
             <EditorText className="px-1" isPreview initialValue={data.description} variant="paragraph" />

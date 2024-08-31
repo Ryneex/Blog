@@ -18,7 +18,7 @@ export async function createBlog(formData: FormData) {
         const blogId = createId()
         const coverResponse = await getCoverUrl(cover, blogId)
         if (!coverResponse.success) return sendError(coverResponse.message)
-        const blog = await client.blog.create({ data: { id: blogId, title, description, content, cover_url: coverResponse.url, author_id: res.user.id } })
+        const blog = await client.blogs.create({ data: { id: blogId, title, description, content, coverUrl: coverResponse.url, authorId: res.user.id } })
         return { success: true, blog }
     } catch (error) {
         return sendError("Something wen't wrong")

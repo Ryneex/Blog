@@ -1,3 +1,3 @@
-import { blog, user } from "@prisma/client";
+import { blogs, users } from "@prisma/client"
 
-export type IBlogCardInfo = Pick<blog, "id" | "title" | "description" | "cover_url" | "createdAt"> & { author: Pick<user, "id" | "name"> }
+export type IBlogCardInfo = Pick<blogs, "id" | "title" | "description" | "coverUrl" | "createdAt"> & { author: Pick<users, "id" | "name"> }

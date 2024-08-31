@@ -16,7 +16,7 @@ export async function signin(data: z.infer<typeof signinValidation>): Promise<IR
     const validate = signinValidation.safeParse(data)
     if (validate.error) return { success: false, message: "Bad Request" }
     try {
-        const user = await client.user.findFirst({ where: { email: validate.data.email } })
+        const user = await client.users.findFirst({ where: { email: validate.data.email } })
         if (!user) return sendError("Email or Password is incorrect")
         if (!user.password) return sendError("Use different login method")
         // validate password

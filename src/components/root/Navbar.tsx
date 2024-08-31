@@ -55,9 +55,9 @@ function ProfilePopover({ user }: { user: IPrivateUser }) {
             <PopoverTrigger>
                 <Avatar
                     isBordered
-                    style={{ backgroundColor: !user.avatar_url ? getColorBasedOnText(user.name) : undefined }}
+                    style={{ backgroundColor: !user.avatarUrl ? getColorBasedOnText(user.name) : undefined }}
                     className="!size-8 cursor-pointer text-white"
-                    src={user.avatar_url ? user.avatar_url : undefined}
+                    src={user.avatarUrl ? user.avatarUrl : undefined}
                     name={user.name.slice(0, 2)}
                 />
             </PopoverTrigger>
@@ -67,10 +67,10 @@ function ProfilePopover({ user }: { user: IPrivateUser }) {
                     name={user.name}
                     description={user.email}
                     avatarProps={{
-                        src: user.avatar_url ? user.avatar_url : undefined,
+                        src: user.avatarUrl ? user.avatarUrl : undefined,
                         name: user.name.slice(0, 2),
                         className: "text-white",
-                        style: { backgroundColor: !user.avatar_url ? getColorBasedOnText(user.name) : undefined },
+                        style: { backgroundColor: !user.avatarUrl ? getColorBasedOnText(user.name) : undefined },
                     }}
                 />
                 <Divider className="my-4" />

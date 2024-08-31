@@ -14,11 +14,11 @@ export async function updateBlog(formData: FormData) {
         const res = await auth.getCurrentUser()
         if (!res.success) return sendError("Bad Request")
         const { id, title, description, content, cover } = validate.data
-        const existingBlog = await client.blog.findFirst({ where: { id, author_id: res.user.id }, select: { author_id: true } })
+        const existingBlog = await client.blogs.findFirst({ where: { id, authorId: res.user.id }, select: { authorId: true } })
         if (!existingBlog) return sendError("Post not found")
         const coverResponse = await getCoverUrl(cover, id)
         if (!coverResponse.success) return sendError(coverResponse.message)
-        const blog = await client.blog.update({ where: { id }, data: { title, description, content, cover_url: coverResponse.url } })
+        const blog = await client.blogs.update({ where: { id }, data: { title, description, content, coverUrl: coverResponse.url } })
         return { success: true, blog }
     } catch (error) {
         return sendError("Something wen't wrong")

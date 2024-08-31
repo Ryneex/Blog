@@ -1,0 +1,59 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id        String     @id @default(cuid()) @map("_id")
+  name      String
+  email     String     @unique
+  avatarUrl String?
+  password  String?
+  bio       String?
+  session   sessions[]
+  blog      blogs[]
+}
+
+type info {
+  os             String?
+  browser        String?
+  browserVersion String?
+  location       String?
+}
+
+model sessions {
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  ip        String
+  info      info
+
+  user users @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "session_userId_fkey")
+}
+
+model blogs {
+  id          String   @id @map("_id")
+  title       String
+  description String
+  content     String
+  coverUrl    String
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      users    @relation(fields: [authorId], references: [id])
+}
+
+model likes {
+  id        String @id @map("_id")
+  blogId    String
+  userId    String
+  createdAt String
+}

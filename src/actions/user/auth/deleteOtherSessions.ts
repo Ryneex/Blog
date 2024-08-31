@@ -8,7 +8,7 @@ export async function deleteOtherSessions() {
     try {
         const { session } = await auth.getCurrentSession()
         if (!session) return sendError()
-        await client.session.deleteMany({ where: { userId: session.userId, NOT: [{ id: session.id }] } })
+        await client.sessions.deleteMany({ where: { userId: session.userId, NOT: [{ id: session.id }] } })
         return { success: true }
     } catch (error) {
         return sendError()

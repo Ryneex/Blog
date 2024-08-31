@@ -2,12 +2,12 @@
 
 import { BreadcrumbItem, Breadcrumbs, Button, Chip } from "@nextui-org/react"
 import { FaDesktop } from "react-icons/fa"
-import { session } from "@prisma/client"
+import { sessions } from "@prisma/client"
 import { DateTime } from "luxon"
 import { deleteOtherSessions } from "@/actions/user/auth/deleteOtherSessions"
 import { useRouter } from "next/navigation"
 
-export default function SecuritySettings({ sessions }: { sessions: (Omit<session, "id"> & { isCurrent: boolean })[] }) {
+export default function SecuritySettings({ sessions }: { sessions: (Omit<sessions, "id"> & { isCurrent: boolean })[] }) {
     const router = useRouter()
     return (
         <div className="w-full">
@@ -45,7 +45,7 @@ export default function SecuritySettings({ sessions }: { sessions: (Omit<session
                                 </div>
                                 {/* prettier-ignore */}
                                 <div className="flex flex-col text-[13px] font-medium leading-tight text-black/50">
-                                    <span>{e.info.browser} | {e.info.browser_version}</span>
+                                    <span>{e.info.browser} | {e.info.browserVersion}</span>
                                     <span>{e.ip} | ({e.info.location ?? "Location not found"})</span>
                                     <span>{DateTime.fromJSDate(e.createdAt).toFormat("D")} @ {DateTime.fromJSDate(e.createdAt).toFormat("tt")}</span>
                                 </div>

@@ -17,7 +17,7 @@ export async function signup(data: z.infer<typeof signupValidation>): Promise<IR
     if (validate.error) return sendError("Bad Request")
     try {
         const hash = await argon.hash(validate.data.password)
-        const user = await client.user.create({ data: { ...validate.data, password: hash }, select: { id: true, name: true, email: true } })
+        const user = await client.users.create({ data: { ...validate.data, password: hash }, select: { id: true, name: true, email: true } })
         // get location and device info
         const ip = headers().get("x-forwarded-for")!
         const info = getSessionInfo(ip)

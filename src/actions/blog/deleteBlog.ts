@@ -10,7 +10,7 @@ export async function deleteBlog(id: string) {
         if (!id) return sendError("Id is required")
         const res = await auth.getCurrentUser()
         if (!res.success) return sendError("Unauthorized")
-        await client.blog.delete({ where: { id, author_id: res.user.id } })
+        await client.blogs.delete({ where: { id, authorId: res.user.id } })
         await cloudinary.v2.uploader.destroy(`blog/cover/${id}`)
         return { success: true as true, message: "Blog has been deleted" }
     } catch (error) {

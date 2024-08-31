@@ -51,7 +51,7 @@ export default function AccountSettings({ userData }: { userData: IPrivateUser }
             <div className="mt-3 flex flex-col gap-5 sm:mt-5">
                 <div className="w-fit space-y-1">
                     <span className="text-sm font-medium text-black/80">Profile Avatar</span>
-                    <AvatarUpload url={userData.avatar_url} name={userData.name} />
+                    <AvatarUpload url={userData.avatarUrl} name={userData.name} />
                 </div>
                 <div className="flex gap-3 sm:gap-7">
                     <div className="w-full space-y-1">

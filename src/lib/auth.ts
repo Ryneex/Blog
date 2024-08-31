@@ -1,8 +1,8 @@
 import { PrismaAdapter } from "authy-js/adapters/prisma"
 import { NextHandler } from "authy-js/handlers/next"
 import { client } from "./prismaClient"
-import { session, user } from "@prisma/client"
+import { sessions, users } from "@prisma/client"
 
-const adapter = new PrismaAdapter({ Session: client.session, User: client.user })
+const adapter = new PrismaAdapter({ Session: client.sessions, User: client.users })
 
-export const auth = NextHandler<user, session>({ adapter })
+export const auth = NextHandler<users, sessions>({ adapter })

@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
         const ip = headers().get("x-forwarded-for")!
         const info = getSessionInfo(ip)
         // Check if user with this email is already registered
-        const userWithEmail = await client.user.findFirst({ where: { email } })
+        const userWithEmail = await client.users.findFirst({ where: { email } })
         if (userWithEmail) {
             await auth.createSession({ userId: userWithEmail.id, expiresAt: new Date(Date.now() + 2592000000), info, ip })
             return Response.redirect(req.nextUrl.origin)
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
         // Register new User if he's already not registered
         const { data } = await octokit.rest.users.getAuthenticated()
         const { login, avatar_url } = data
-        const createdUser = await client.user.create({ data: { email, name: login, avatar_url } })
+        const createdUser = await client.users.create({ data: { email, name: login, avatarUrl: avatar_url } })
         await auth.createSession({ userId: createdUser.id, expiresAt: new Date(Date.now() + 2592000000), info, ip })
         return Response.redirect(req.nextUrl.origin)
     } catch (error) {
