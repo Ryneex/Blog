@@ -7,6 +7,8 @@ import { Button, Image, Modal, ModalBody, ModalContent, ModalHeader, useDisclosu
 import { Input } from "./shadcn/ui/input"
 import { useState } from "react"
 import Alert from "./Alert"
+import { IoCloudOfflineOutline } from "react-icons/io5"
+import { SlCloudUpload } from "react-icons/sl"
 
 export default function CoverImage({ src, onValueChange, isPreview }: { src?: string; onValueChange?(image: string | File): any; isPreview?: boolean }) {
     const [imageUrl, setImageUrl] = useState<string | undefined>(src)
@@ -37,7 +39,9 @@ export default function CoverImage({ src, onValueChange, isPreview }: { src?: st
             {imageUrl ? (
                 <div className="relative h-full">
                     {failedToLoadImage ? (
-                        <div className="grid h-full place-items-center rounded-xl border text-sm text-red-400">Failed to load Image</div>
+                        <div className="flex h-full flex-col items-center justify-center gap-2 rounded-xl border bg-gray-200 text-sm text-gray-400">
+                            <IoCloudOfflineOutline size={40} /> Failed to load Image
+                        </div>
                     ) : (
                         <Image onError={() => setFailedToLoadImage(true)} classNames={{ wrapper: "h-full w-full !max-w-full" }} className="z-0 h-full w-full object-cover" src={imageUrl} alt="" />
                     )}
@@ -48,7 +52,8 @@ export default function CoverImage({ src, onValueChange, isPreview }: { src?: st
                     )}
                 </div>
             ) : (
-                <div onClick={onOpen} className="grid h-full cursor-pointer place-items-center border text-sm text-blue-500">
+                <div onClick={onOpen} className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-gray-300 bg-gray-200 text-sm text-gray-500">
+                    <SlCloudUpload size={40} />
                     Click Here to Upload Blog Cover
                 </div>
             )}
@@ -76,9 +81,13 @@ export default function CoverImage({ src, onValueChange, isPreview }: { src?: st
                                     </Button>
                                 </div>
                                 {dropError && <Alert message={dropError} variant="error" />}
-                                <div className="grid h-full w-full cursor-pointer place-items-center rounded-md border border-dashed border-slate-400" {...getRootProps()}>
+                                <div
+                                    className="flex h-28 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-md border border-dashed border-slate-400 text-sm text-gray-500"
+                                    {...getRootProps()}
+                                >
                                     <input {...getInputProps()} />
-                                    <p className="py-10 text-sm text-black/50">Select Image from Device</p>
+                                    <SlCloudUpload size={40} />
+                                    Select image from device
                                 </div>
                             </ModalBody>
                         </>

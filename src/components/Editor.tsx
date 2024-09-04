@@ -62,6 +62,8 @@ export default function Editor({ initialData }: { initialData?: blogs }) {
             </div>
             <EditorText initialValue={title} onValueChange={setTitle} variant="heading" />
             <EditorText initialValue={description} onValueChange={setDescription} variant="paragraph" />
+            {/* This style removes the padding from the editor */}
+            <style dangerouslySetInnerHTML={{ __html: `.bn-editor{padding-left:4px; padding-right:4px;}` }}></style>
             <BlockNoteView theme="light" editor={blocknote} />
         </div>
     )
