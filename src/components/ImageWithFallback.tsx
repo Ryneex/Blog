@@ -1,7 +1,7 @@
 "use client"
 
 import { Image, ImageProps, Skeleton } from "@nextui-org/react"
-import React, { useState } from "react"
+import { useState } from "react"
 import { cn } from "./shadcn/utils"
 import { ExcludeKeys } from "@/helpers/excludeKeys"
 

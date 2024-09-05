@@ -7,7 +7,7 @@ import { BlockNoteView } from "@blocknote/mantine"
 import { ErrorBoundary } from "react-error-boundary"
 import { useCreateBlockNote } from "@blocknote/react"
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react"
-import { blogs } from "@prisma/client"
+import { blogs, likes } from "@prisma/client"
 import { DateTime } from "luxon"
 import { useSnapshot } from "valtio"
 import Alert from "@/components/Alert"
@@ -19,13 +19,26 @@ import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { deleteBlog } from "@/actions/blog/deleteBlog"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { likeBlog } from "@/actions/blog/likeBlog"
+import { useState } from "react"
+import { AiOutlineLike } from "react-icons/ai"
+import { AiFillLike } from "react-icons/ai"
+import { CiChat2 } from "react-icons/ci"
 
-export default function BlogPreview({ data }: { data: blogs & { author: IBaseUser } }) {
+type IProps = {
+    author: IBaseUser
+    _count: { likes: number; comments: number }
+    likes: likes[]
+} & blogs
+
+export default function BlogPreview({ data }: { data: IProps }) {
     const { user } = useSnapshot(store)
     const router = useRouter()
+    const [isLiked, setIsLiked] = useState(data.likes[0] ? true : false)
+    const [likeCount, setLikeCount] = useState(data._count.likes)
 
     return (
-        <div className="container mt-7 flex flex-col overflow-hidden rounded-md bg-transparent pb-5">
+        <div className="pb-7">
             <div className="flex items-center justify-between">
                 <User
                     className="mb-3 mr-auto"
@@ -68,9 +81,25 @@ export default function BlogPreview({ data }: { data: blogs & { author: IBaseUse
             <EditorText className="px-1" isPreview initialValue={data.title} variant="heading" />
             <EditorText className="px-1" isPreview initialValue={data.description} variant="paragraph" />
             <ErrorBoundary FallbackComponent={InvalidContent}>
+                {/* This style removes the padding from the editor */}
                 <style dangerouslySetInnerHTML={{ __html: `.bn-editor{padding-left:4px; padding-right:4px;}` }}></style>
                 <BlockNote content={data.content} />
             </ErrorBoundary>
+            <div className="flex select-none gap-5 border-t pt-5">
+                <div
+                    className="flex h-7 cursor-pointer items-center gap-2 rounded-full bg-gray-200 px-3"
+                    onClick={() => {
+                        likeBlog(data.id)
+                        setLikeCount((e) => (isLiked ? --e : ++e))
+                        setIsLiked(() => !isLiked)
+                    }}
+                >
+                    {isLiked ? <AiFillLike className="text-blue-600" size={20} /> : <AiOutlineLike size={20} />} <span>{likeCount}</span>
+                </div>
+                <div className="flex h-7 cursor-pointer items-center gap-2 rounded-full bg-gray-200 px-3">
+                    <CiChat2 className="stroke-[0.5]" size={20} /> <span>{data._count.comments}</span>
+                </div>
+            </div>
         </div>
     )
 }

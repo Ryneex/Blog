@@ -3,7 +3,7 @@
 import { IBlogCardInfo } from "@/types/blog"
 import { DateTime } from "luxon"
 import Link from "next/link"
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 type IProp = {
     blog: IBlogCardInfo
