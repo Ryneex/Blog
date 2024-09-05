@@ -10,7 +10,7 @@ import Alert from "./Alert"
 import { IoCloudOfflineOutline } from "react-icons/io5"
 import { SlCloudUpload } from "react-icons/sl"
 
-export default function CoverImage({ src, onValueChange, isPreview }: { src?: string; onValueChange?(image: string | File): any; isPreview?: boolean }) {
+export default function BlogCoverImage({ src, onValueChange, isPreview }: { src?: string; onValueChange?(image: string | File): any; isPreview?: boolean }) {
     const [imageUrl, setImageUrl] = useState<string | undefined>(src)
     const [inputImageUrl, setInputImageUrl] = useState("")
     const [failedToLoadImage, setFailedToLoadImage] = useState(false)

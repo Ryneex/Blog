@@ -1,7 +1,7 @@
 "use client"
 
-import CoverImage from "@/components/CoverImage"
-import EditorText from "@/components/EditorText"
+import BlogCoverImage from "@/components/BlogCoverImage"
+import EditorText from "@/components/editor/EditorText"
 import { store } from "@/store/store"
 import { BlockNoteView } from "@blocknote/mantine"
 import { ErrorBoundary } from "react-error-boundary"
@@ -76,7 +76,7 @@ export default function BlogPreview({ data }: { data: IProps }) {
                 )}
             </div>
             <div className="relative aspect-[10/4] shrink-0 overflow-hidden">
-                <CoverImage isPreview src={data.coverUrl} />
+                <BlogCoverImage isPreview src={data.coverUrl} />
             </div>
             <EditorText className="px-1" isPreview initialValue={data.title} variant="heading" />
             <EditorText className="px-1" isPreview initialValue={data.description} variant="paragraph" />
