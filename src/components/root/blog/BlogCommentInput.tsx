@@ -6,14 +6,21 @@ import { useRef, useState } from "react"
 import { Button } from "@nextui-org/react"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { comment } from "@/actions/blog/comment"
+import { useRouter } from "next/navigation"
 
 export default function BlogCommentInput({ blogId }: { blogId: string }) {
     const [isFocused, setIsFocused] = useState(false)
     const commentInput = useRef<HTMLDivElement>(null)
+    const router = useRouter()
     const [text, setText] = useState("")
 
     async function submit() {
-        callActionWithToast(comment({ blogId, content: text }))
+        const res = await callActionWithToast(comment({ blogId, content: text }))
+        if (res.success) {
+            router.refresh()
+            setIsFocused(false)
+            setText("")
+        }
     }
 
     return (

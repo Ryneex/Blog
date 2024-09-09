@@ -16,6 +16,6 @@ export async function likeBlog(blogId: string) {
         await client.likes.create({ data: { blogId, userId: user.id } })
         return { success: true, message: "Blog has been liked" }
     } catch (error) {
-        sendError("Something wen't wrong")
+        return sendError("Something wen't wrong")
     }
 }

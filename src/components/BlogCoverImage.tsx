@@ -1,7 +1,5 @@
 "use client"
 
-import "@blocknote/core/fonts/inter.css"
-import "@blocknote/mantine/style.css"
 import { useDropzone } from "react-dropzone"
 import { Button, Image, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react"
 import { Input } from "./shadcn/ui/input"

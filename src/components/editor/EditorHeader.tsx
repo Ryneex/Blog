@@ -1,17 +1,17 @@
+"use client"
+
 import { useRef, useState } from "react"
 import { Inter } from "next/font/google"
 import TextareaAutosize from "react-textarea-autosize"
 import { twMerge } from "tailwind-merge"
 const inter = Inter({ subsets: ["latin"] })
 
-export default function EditorText({
-    variant,
+export default function EditorHeader({
     onValueChange,
     initialValue,
     isPreview,
     className,
 }: {
-    variant: "heading" | "paragraph"
     onValueChange?: (e: string) => unknown
     initialValue?: string
     isPreview?: boolean
@@ -20,9 +20,8 @@ export default function EditorText({
     const [value, setValue] = useState(initialValue || "")
     const [isEditable, setIsEditable] = useState(false)
     const textarea = useRef<HTMLTextAreaElement>(null)
-    const style = variant == "heading" ? "fluid-text-5xl/normal font-bold" : "text-base/normal"
     return (
-        <div className={twMerge("px-[4px] py-[3px] text-[#3f3f3f]", style, inter.className, className)}>
+        <div className={twMerge("py-5 text-5xl font-bold", inter.className, className)}>
             {isEditable ? (
                 <TextareaAutosize
                     ref={textarea}
@@ -31,7 +30,7 @@ export default function EditorText({
                             setIsEditable(false)
                         }
                     }}
-                    placeholder={variant == "heading" ? "Heading" : "Your blog description goes here"}
+                    placeholder={"Heading"}
                     onBlur={() => setIsEditable(false)}
                     className="block w-full resize-none overflow-hidden outline-none placeholder:text-black/40"
                     value={value}
@@ -49,7 +48,7 @@ export default function EditorText({
                         setTimeout(() => textarea.current?.focus(), 0)
                     }}
                 >
-                    {value || <span className="text-black/40">{variant == "heading" ? "Heading" : "Your blog description goes here"}</span>}
+                    {value || <span className="text-black/40">Heading</span>}
                 </div>
             )}
         </div>
