@@ -1,6 +1,5 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["omitApi"]
 }
 
 datasource db {
@@ -17,6 +16,11 @@ model users {
   bio       String?
   session   sessions[]
   blog      blogs[]
+  likes     likes[]
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  comments  comments[]
 }
 
 type info {
@@ -29,10 +33,10 @@ type info {
 model sessions {
   id        String   @id @default(cuid()) @map("_id")
   userId    String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
   ip        String
   info      info
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 
   user users @relation(fields: [userId], references: [id])
 
@@ -48,12 +52,31 @@ model blogs {
   authorId    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  author      users    @relation(fields: [authorId], references: [id])
+  likes       likes[]
+
+  author   users      @relation(fields: [authorId], references: [id])
+  comments comments[]
 }
 
 model likes {
-  id        String @id @map("_id")
+  id        String   @id @default(cuid()) @map("_id")
   blogId    String
   userId    String
-  createdAt String
+  createdAt DateTime @default(now())
+
+  blog blogs @relation(fields: [blogId], references: [id])
+  user users @relation(fields: [userId], references: [id])
+
+  @@unique([blogId, userId])
+}
+
+model comments {
+  id        String   @id @default(cuid()) @map("_id")
+  blogId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+
+  author users @relation(fields: [userId], references: [id])
+  blog   blogs @relation(fields: [blogId], references: [id])
 }
