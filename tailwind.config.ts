@@ -27,6 +27,7 @@ const config = {
     },
     plugins: [
         nextui(),
+        require("@tailwindcss/typography"),
         require("tailwindcss-fluid-type")({
             settings: { prefix: "fluid-" },
         }),
