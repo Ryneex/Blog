@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const passwordValidation = z.string().min(5).max(100)
+export const passwordValidation = z.string().min(6).max(100)
 
 export const signinValidation = z.object({
     email: z.string().toLowerCase().trim().email(),
