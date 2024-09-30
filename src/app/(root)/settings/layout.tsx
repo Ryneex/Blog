@@ -4,11 +4,13 @@ import { redirect } from "next/navigation"
 
 export default async function layout({ children }: { children: React.ReactNode }) {
     const res = await getCurrentUser()
-    if (!res.success) redirect("/")
+    if (!res.success) return redirect("/")
     return (
-        <div className="container h-full gap-10 overflow-auto py-2 sm:flex sm:py-5">
-            <Sidebar />
-            {children}
+        <div className="overflow-auto">
+            <div className="container gap-10 ~pb-2/5 sm:flex">
+                <Sidebar />
+                {children}
+            </div>
         </div>
     )
 }

@@ -8,13 +8,10 @@ import { deleteBlog } from "@/actions/blog/deleteBlog"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { FiTrash } from "react-icons/fi"
 import { useRouter } from "next/navigation"
-import { useSnapshot } from "valtio"
-import { store } from "@/store/store"
 
-export default function BlogOptionsDropdown({ blogId, authorId }: { blogId: string; authorId: string }) {
-    const { user } = useSnapshot(store)
+export default function BlogOptionsDropdown({ blogId, authorId, currentUserId }: { blogId: string; authorId: string; currentUserId?: string }) {
     const router = useRouter()
-    if (user?.id === authorId)
+    if (currentUserId === authorId)
         return (
             <Dropdown placement="bottom-end">
                 <DropdownTrigger>

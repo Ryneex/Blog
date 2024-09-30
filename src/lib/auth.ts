@@ -5,4 +5,4 @@ import { sessions, users } from "@prisma/client"
 
 const adapter = new PrismaAdapter({ Session: client.sessions, User: client.users })
 
-export const auth = NextHandler<users, sessions>({ adapter })
+export const auth = NextHandler<users, sessions>({ adapter, cookie: { options: { expires: "30d" } } })

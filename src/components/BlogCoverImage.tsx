@@ -1,17 +1,16 @@
 "use client"
 
 import { useDropzone } from "react-dropzone"
-import { Button, Image, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react"
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react"
 import { Input } from "./shadcn/ui/input"
 import { useState } from "react"
 import Alert from "./Alert"
-import { IoCloudOfflineOutline } from "react-icons/io5"
 import { SlCloudUpload } from "react-icons/sl"
+import ImageWithFallback from "./ImageWithFallback"
 
 export default function BlogCoverImage({ src, onValueChange, isPreview }: { src?: string; onValueChange?(image: string | File): any; isPreview?: boolean }) {
     const [imageUrl, setImageUrl] = useState<string | undefined>(src)
     const [inputImageUrl, setInputImageUrl] = useState("")
-    const [failedToLoadImage, setFailedToLoadImage] = useState(false)
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const [dropError, setDropError] = useState("")
 
@@ -28,21 +27,14 @@ export default function BlogCoverImage({ src, onValueChange, isPreview }: { src?
             onValueChange && onValueChange(imageFile)
             setImageUrl(URL.createObjectURL(imageFile))
             onOpenChange()
-            setFailedToLoadImage(false)
         },
     })
 
     return (
         <div className="h-full">
             {imageUrl ? (
-                <div className="relative h-full">
-                    {failedToLoadImage ? (
-                        <div className="flex h-full flex-col items-center justify-center gap-2 rounded-xl border bg-gray-200 text-sm text-gray-400">
-                            <IoCloudOfflineOutline size={40} /> Failed to load Image
-                        </div>
-                    ) : (
-                        <Image onError={() => setFailedToLoadImage(true)} classNames={{ wrapper: "h-full w-full !max-w-full" }} className="z-0 h-full w-full object-cover" src={imageUrl} alt="" />
-                    )}
+                <div className="h-full">
+                    <ImageWithFallback className="rounded-xl" src={imageUrl} alt="" />
                     {!isPreview && (
                         <Button onClick={onOpen} className="absolute bottom-2 right-2 h-6 rounded-full text-xs" color="primary">
                             Change Cover
@@ -56,42 +48,39 @@ export default function BlogCoverImage({ src, onValueChange, isPreview }: { src?
                 </div>
             )}
 
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-                <ModalContent>
-                    {() => (
-                        <>
-                            <ModalHeader className="pb-0">Add Image</ModalHeader>
-                            <ModalBody>
-                                <div className="flex gap-2">
-                                    <Input type="url" value={inputImageUrl} onChange={(e) => setInputImageUrl(e.target.value)} placeholder="https://example.com/image" className="h-8 rounded-full" />
-                                    <Button
-                                        onClick={() => {
-                                            setDropError("")
-                                            setImageUrl(inputImageUrl)
-                                            onValueChange && onValueChange(inputImageUrl)
-                                            onOpenChange()
-                                            setFailedToLoadImage(false)
-                                        }}
-                                        className="h-8 rounded-full"
-                                        color="primary"
-                                    >
-                                        Add
-                                    </Button>
-                                </div>
-                                {dropError && <Alert message={dropError} variant="error" />}
-                                <div
-                                    className="flex h-28 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-md border border-dashed border-slate-400 text-sm text-gray-500"
-                                    {...getRootProps()}
+            {!isPreview && (
+                <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <ModalContent>
+                        <ModalHeader className="pb-0">Add Image</ModalHeader>
+                        <ModalBody>
+                            <div className="flex gap-2">
+                                <Input type="url" value={inputImageUrl} onChange={(e) => setInputImageUrl(e.target.value)} placeholder="https://example.com/image" className="h-8 rounded-full" />
+                                <Button
+                                    onClick={() => {
+                                        setDropError("")
+                                        setImageUrl(inputImageUrl)
+                                        onValueChange && onValueChange(inputImageUrl)
+                                        onOpenChange()
+                                    }}
+                                    className="h-8 rounded-full"
+                                    color="primary"
                                 >
-                                    <input {...getInputProps()} />
-                                    <SlCloudUpload size={40} />
-                                    Select image from device
-                                </div>
-                            </ModalBody>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+                                    Add
+                                </Button>
+                            </div>
+                            {dropError && <Alert message={dropError} variant="error" />}
+                            <div
+                                className="flex h-28 w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-md border border-dashed border-slate-400 text-sm text-gray-500"
+                                {...getRootProps()}
+                            >
+                                <input {...getInputProps()} />
+                                <SlCloudUpload size={40} />
+                                Select image from device
+                            </div>
+                        </ModalBody>
+                    </ModalContent>
+                </Modal>
+            )}
         </div>
     )
 }

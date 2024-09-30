@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -15,12 +15,13 @@ model users {
   password  String?
   bio       String?
   session   sessions[]
-  blog      blogs[]
+  blogs     blogs[]
   likes     likes[]
-
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
   comments  comments[]
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  comment_replies comment_replies[]
 }
 
 type info {
@@ -38,24 +39,26 @@ model sessions {
   expiresAt DateTime
   createdAt DateTime @default(now())
 
-  user users @relation(fields: [userId], references: [id])
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId], map: "session_userId_fkey")
 }
 
 model blogs {
-  id          String   @id @map("_id")
+  id          String     @id @map("_id")
   title       String
   description String
   content     String
   coverUrl    String
   authorId    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   likes       likes[]
+  comments    comments[]
 
-  author   users      @relation(fields: [authorId], references: [id])
-  comments comments[]
+  author users @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
 }
 
 model likes {
@@ -64,10 +67,12 @@ model likes {
   userId    String
   createdAt DateTime @default(now())
 
-  blog blogs @relation(fields: [blogId], references: [id])
-  user users @relation(fields: [userId], references: [id])
+  blog blogs @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([blogId, userId])
+  @@index([blogId])
+  @@index([userId])
 }
 
 model comments {
@@ -77,6 +82,38 @@ model comments {
   content   String
   createdAt DateTime @default(now())
 
-  author users @relation(fields: [userId], references: [id])
-  blog   blogs @relation(fields: [blogId], references: [id])
+  author          users             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  blog            blogs             @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  comment_likes   comment_likes[]
+  comment_replies comment_replies[]
+
+  @@index([blogId])
+  @@index([userId])
+}
+
+model comment_replies {
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
+  parentId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  author        users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parentComment comments @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([parentId])
+}
+
+model comment_likes {
+  id        String   @id @default(cuid()) @map("_id")
+  commentId String
+  userId    String
+  createdAt DateTime @default(now())
+
+  comment comments @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, commentId])
+  @@index([userId])
+  @@index([commentId])
 }

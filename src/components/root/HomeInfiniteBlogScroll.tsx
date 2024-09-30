@@ -9,7 +9,8 @@ import { useState } from "react"
 
 export default function HomeInfiniteBlogScroll({ initialBlogs }: { initialBlogs: IBlogCardInfo[] }) {
     const query = useSearchParams().get("q")
-    const [hasMore, setHasMore] = useState(true)
+    // the value `12` should be in sync with getBlogsByQuery functions `take` query variable.
+    const [hasMore, setHasMore] = useState(initialBlogs.length === 12)
     const [blogs, setBlogs] = useState(initialBlogs)
 
     const refetch = async () => {

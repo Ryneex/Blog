@@ -13,7 +13,7 @@ export async function updateProfile(data: z.infer<typeof updateUserValidation>) 
         const res = await auth.getCurrentUser()
         if (!res.success) return sendError("Bad Request")
         await client.users.update({ where: { id: res.user.id }, data: validate.data })
-        return { success: true as const, message: "Profile updated" }
+        return { success: true as const, message: "Profile has been updated" }
     } catch (error) {
         return sendError("Something wen't wrong")
     }

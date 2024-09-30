@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 export default function SecuritySettings({ sessions }: { sessions: (Omit<sessions, "id"> & { isCurrent: boolean })[] }) {
     const router = useRouter()
     return (
-        <div className="w-full">
+        <div className="w-full ~py-2/5">
             <Breadcrumbs className="hidden sm:block">
                 <BreadcrumbItem>Settings</BreadcrumbItem>
                 <BreadcrumbItem>Account</BreadcrumbItem>
@@ -31,7 +31,7 @@ export default function SecuritySettings({ sessions }: { sessions: (Omit<session
             <div className="flex flex-col gap-5 py-3">
                 {sessions.map((e, i) => (
                     <div key={i} className="space-y-2 rounded-xl border p-5">
-                        <div className="fluid-text-md font-medium">{DateTime.fromJSDate(e.createdAt).toFormat("DDD")}</div>
+                        <div className="font-medium">{DateTime.fromJSDate(e.createdAt).toFormat("DDD")}</div>
                         <div className="flex items-center gap-5">
                             <FaDesktop className="text-black/70" size={70} />
                             <div className="space-y-0.5">

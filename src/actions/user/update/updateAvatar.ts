@@ -16,17 +16,20 @@ export async function updateAvatar(formData: FormData) {
         if (!validate.success) return sendError("Bad Request")
         const { user } = await auth.getCurrentUser()
         if (!user) return sendError("Bad Request")
+
+        // upload the new avatar to cloudinary
         const uploadResponse: ITypeUploadResponse = await new Promise(async (res) => {
             const stream = cloudinary.v2.uploader.upload_stream({ resource_type: "image", folder: "/blogApp/profileAvatar", public_id: user.id }, (err, data) => {
                 if (err) return res(sendError(err.message))
                 if (data) return res({ success: true, url: data.secure_url })
-                res(sendError("something went wrong"))
+                res(sendError("Something went wrong"))
             })
             stream.end(Buffer.from(await validate.data.arrayBuffer()))
         })
+
         if (!uploadResponse.success) return uploadResponse
         await client.users.update({ where: { id: user.id }, data: { avatarUrl: uploadResponse.url } })
-        return { success: true as const, message: "Avatar updated" }
+        return { success: true as const, message: "Avatar has been updated" }
     } catch (error) {
         return sendError("Something wen't wrong")
     }

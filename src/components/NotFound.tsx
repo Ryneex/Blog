@@ -6,7 +6,7 @@ import { cn } from "./shadcn/utils"
 export function NotFound({ className, title, description, hideButtons }: { className?: string; title?: string; description?: string; hideButtons?: boolean }) {
     const router = useRouter()
     return (
-        <section className={cn("grid h-full place-items-center bg-white dark:bg-gray-900", className)}>
+        <section className={cn("grid h-full place-items-center dark:bg-gray-900", className)}>
             <div className="flex max-w-sm flex-col items-center text-center">
                 <p className="rounded-full bg-blue-50 p-3 text-sm font-medium text-blue-500 dark:bg-gray-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-6 w-6">

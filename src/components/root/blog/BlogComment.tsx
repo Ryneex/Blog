@@ -1,48 +1,77 @@
-import { DateTime } from "luxon"
-import BlogCommentInput from "./BlogCommentInput"
-import { Avatar } from "@nextui-org/react"
-import { client } from "@/lib/prismaClient"
-import { getColorBasedOnText } from "@/lib/utils"
-import { getCurrentUser } from "@/helpers/getCurrentUser"
+"use client"
+
+import { getTimeAgo } from "@/lib/utils/getTimeAgo"
+import { comments, comment_replies, users } from "@prisma/client"
 import CommentDeleteButton from "./CommentDeleteButton"
+import { Avatar } from "@/components/Avatar"
+import BlogCommentLikeCount from "./BlogCommentLikeCount"
+import { useState } from "react"
+import BlogCommentReplyInput from "./BlogCommentReplyInput"
+import Link from "next/link"
 
-export default async function BlogComment({ blogId }: { blogId: string }) {
-    const { user } = await getCurrentUser()
-    const comments = await client.comments.findMany({ where: { blogId }, include: { author: { select: { id: true, name: true, avatarUrl: true } } }, orderBy: { createdAt: "desc" } })
-    const finalComment: ((typeof comments)[0] & { isMine: boolean })[] = comments.map((comment) => ({ ...comment, isMine: comment.author.id === user?.id }))
-
-    return (
-        <div>
-            <BlogCommentInput blogId={blogId} />
-            <div className="mt-5 flex flex-col gap-8">
-                {finalComment.map((comment) => (
-                    <div className="flex gap-2" key={comment.id}>
-                        <Avatar
-                            size="sm"
-                            style={{ backgroundColor: comment.author.avatarUrl ? undefined : getColorBasedOnText(comment.author.name) }}
-                            className="text-white"
-                            name={comment.author.name.slice(0, 2)}
-                            src={comment.author.avatarUrl ?? undefined}
-                        />
-                        <div className="w-full space-y-3">
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm font-medium text-black/90">{comment.author.name}</span>
-                                <span className="text-xs">{getTimeAgo(comment.createdAt)}</span>
-                                {comment.isMine && <CommentDeleteButton commentId={comment.id} />}
-                            </div>
-                            <span className="text-sm text-black/90">{comment.content}</span>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
+type IComment = comments & {
+    author: Pick<users, "id" | "name" | "avatarUrl">
+    comment_replies: (comment_replies & { author: IComment["author"] })[]
+    isLiked: boolean
+    _count: {
+        comment_likes: number
+    }
 }
 
-function getTimeAgo(date: Date) {
-    const luxonDate = DateTime.fromJSDate(date).toRelative()
-    return luxonDate?.replace(/ minutes| minute | hours| hour| days| day| months| month| years| year/, (word) => {
-        const mapping = { minute: "m", minutes: "m", hour: "h", hours: "h", day: "d", days: "d", month: "mon", months: "mon", year: "y", years: "y" }
-        return mapping[word.trim() as keyof typeof mapping]
-    })
+export default function BlogComment({ comment, userId, isLoggedIn }: { comment: IComment; userId?: string; isLoggedIn: boolean }) {
+    const [isReplyInputOpen, setIsReplyInputOpen] = useState(false)
+    return (
+        <div id={comment.id} className="mt-5">
+            <div className="flex gap-2" key={comment.id}>
+                <div className="flex flex-col items-center gap-1">
+                    <Link href={`/user/${comment.author.id}`}>
+                        <Avatar size="sm" className="shrink-0" name={comment.author.name} src={comment.author.avatarUrl} />
+                    </Link>
+                    {!!comment.comment_replies.length && <div className="h-[calc(100%)] w-[1px] bg-gray-300"></div>}
+                </div>
+                <div className="w-full space-y-1">
+                    <div className="flex items-center gap-2">
+                        <Link href={`/user/${comment.author.id}`} className="text-sm font-medium text-black/90">
+                            {comment.author.name}
+                        </Link>
+                        <span className="text-xs">{getTimeAgo(comment.createdAt)}</span>
+                        {comment.userId === userId && <CommentDeleteButton commentId={comment.id} />}
+                    </div>
+                    <span className="text-sm text-black/90">{comment.content}</span>
+                    <div className="flex items-center gap-3">
+                        <BlogCommentLikeCount isLoggedIn={isLoggedIn} commentId={comment.id} liked={comment.isLiked} likes={comment._count.comment_likes} />
+                        <span onClick={() => setIsReplyInputOpen(true)} className="cursor-pointer text-xs font-medium">
+                            Reply
+                        </span>
+                    </div>
+                    {isReplyInputOpen && <BlogCommentReplyInput onCancel={() => setIsReplyInputOpen(false)} parentId={comment.id} />}
+                </div>
+            </div>
+            {/* Replies */}
+            {comment.comment_replies.map((reply, index) => {
+                return (
+                    <div id={reply.id} className="relative ml-10 flex gap-2 pt-5" key={reply.id}>
+                        <div className="flex h-fit items-center gap-1">
+                            <Link href={`/user/${reply.author.id}`}>
+                                <Avatar size="sm" className="shrink-0" name={reply.author.name} src={reply.author.avatarUrl} />
+                            </Link>
+                            <div className="absolute right-full h-10 w-[25px] -translate-y-1/2 rounded-bl-xl border-b border-l border-gray-300"></div>
+                        </div>
+                        {/* render left line on every replies except the last one */}
+                        {index !== comment.comment_replies.length - 1 && <div className="bottom-0-0 absolute right-full h-full w-[25px] border-l border-gray-300"></div>}
+                        <div className="w-full space-y-3">
+                            <div className="flex items-center gap-2">
+                                <Link scroll href={`/user/${reply.author.id}`} className="text-sm font-medium text-black/90">
+                                    {reply.author.name}
+                                </Link>
+                                <span className="text-xs">{getTimeAgo(reply.createdAt)}</span>
+                                {reply.userId === userId && <CommentDeleteButton commentId={reply.id} />}
+                            </div>
+                            <span className="text-sm text-black/90">{reply.content}</span>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    )
 }

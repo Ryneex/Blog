@@ -19,9 +19,9 @@ export async function updateBlog(formData: FormData) {
         // Creating small description from markdown content
         const description = markdownToTxt(validate.data.content).substring(0, 200)
 
-        const existingBlog = await client.blogs.findFirst({ where: { id, authorId: res.user.id }, select: { authorId: true } })
-        if (!existingBlog) return sendError("Post not found")
-        const coverResponse = await getCoverUrl(cover, id)
+        const existingBlog = await client.blogs.findFirst({ where: { id, authorId: res.user.id }, select: { authorId: true, coverUrl: true } })
+        if (!existingBlog) return sendError("Post couldn't be found")
+        const coverResponse = await getCoverUrl(cover, id, existingBlog.coverUrl)
         if (!coverResponse.success) return sendError(coverResponse.message)
         const blog = await client.blogs.update({ where: { id }, data: { title, description, content, coverUrl: coverResponse.url } })
         return { success: true, blog }

@@ -6,8 +6,11 @@ type ITypeGetCoverUrl = ErrorResponse | SuccessResponse<{ url: string }>
 /**
  * If the `cover` is already a URL, the function just returns it. If it's a file, the function uploads it to Cloudinary and then returns the URL.
  */
-export async function getCoverUrl(cover: string | File, blogId: string): Promise<ITypeGetCoverUrl> {
-    if (typeof cover === "string") return { success: true, url: cover }
+export async function getCoverUrl(cover: string | File, blogId: string, existingBlogCoverUrl?: string): Promise<ITypeGetCoverUrl> {
+    if (typeof cover === "string") {
+        if (cover !== existingBlogCoverUrl && existingBlogCoverUrl?.includes("res.cloudinary.com")) await cloudinary.v2.api.delete_resources(["blogApp/blogCover/" + blogId])
+        return { success: true, url: cover }
+    }
 
     const res: ITypeGetCoverUrl = await new Promise(async (res) => {
         const stream = cloudinary.v2.uploader.upload_stream({ resource_type: "image", folder: "/blogApp/blogCover", public_id: blogId }, (err, data) => {

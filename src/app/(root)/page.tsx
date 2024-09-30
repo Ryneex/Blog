@@ -10,7 +10,7 @@ export default async function page({ searchParams }: { searchParams: { [x: strin
         <div className="h-full overflow-auto">
             <div className="container flex h-full flex-col">
                 <div className="flex shrink-0 items-center justify-between gap-2 pt-3 sm:pt-5">
-                    <h1 className="hidden text-center font-bold text-black/80 fluid-text-xl sm:block">Blogs</h1>
+                    <h1 className="hidden text-center text-2xl font-bold text-black/80 sm:block">Blogs</h1>
                     <SearchBar />
                 </div>
                 {blogs ? (

@@ -1,14 +1,13 @@
 "use client"
 
-import { cn } from "@/components/shadcn/utils"
 import TextareaAutosize from "react-textarea-autosize"
 import { useRef, useState } from "react"
 import { Button } from "@nextui-org/react"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
-import { comment } from "@/actions/blog/comment"
+import { comment } from "@/actions/comment/comment"
 import { useRouter } from "next/navigation"
 
-export default function BlogCommentInput({ blogId }: { blogId: string }) {
+export default function BlogCommentInput({ blogId, isLoggedIn }: { blogId: string; isLoggedIn: boolean }) {
     const [isFocused, setIsFocused] = useState(false)
     const commentInput = useRef<HTMLDivElement>(null)
     const router = useRouter()
@@ -23,12 +22,13 @@ export default function BlogCommentInput({ blogId }: { blogId: string }) {
         }
     }
 
+    if (!isLoggedIn) return <div className="grid h-[38px] place-items-center border-y text-sm">Please login to comment in this blog</div>
+
     return (
         <div className="relative" ref={commentInput}>
             <TextareaAutosize
                 onClick={() => {
                     setIsFocused(true)
-
                     // Scrolling the container if comment input is not fully visible
                     const container = document.querySelector<HTMLDivElement>(".blogContainer")!
                     const inputTop = commentInput.current!.getBoundingClientRect().top
@@ -37,12 +37,21 @@ export default function BlogCommentInput({ blogId }: { blogId: string }) {
                 }}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className={cn("block w-full resize-none overflow-hidden rounded-3xl border border-gray-300 px-3 py-2 text-sm placeholder:text-black/70 focus:outline-none", isFocused && "min-h-32")}
+                minRows={isFocused ? 5 : undefined}
+                className="block h-[38px] w-full resize-none overflow-hidden rounded-3xl border border-gray-300 bg-white/30 px-3 py-2 text-sm duration-200 transition-height placeholder:text-black/70 focus:outline-none"
                 placeholder="Add a comment"
             />
             {isFocused && (
                 <div className="absolute bottom-2 right-2 flex gap-2">
-                    <Button onPress={() => setIsFocused(false)} size="sm" className="rounded-full font-medium" variant="flat">
+                    <Button
+                        onPress={() => {
+                            setIsFocused(false)
+                            setText("")
+                        }}
+                        size="sm"
+                        className="rounded-full font-medium"
+                        variant="flat"
+                    >
                         Cancel
                     </Button>
                     <Button onPress={submit} size="sm" className="rounded-full font-medium" color="primary">

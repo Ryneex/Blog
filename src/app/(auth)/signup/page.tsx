@@ -3,6 +3,7 @@
 import { signup } from "@/actions/user/auth/signup"
 import Alert from "@/components/Alert"
 import { Input } from "@/components/shadcn/ui/input"
+import useCreateUrlWithRedirectParam from "@/hooks/useCreateUrlWithRedirectParam"
 import { signupValidation } from "@/validations/user"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@nextui-org/react"
@@ -12,7 +13,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { FaGithub } from "react-icons/fa"
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: Record<string, string> }) {
     const [serverSentError, setServerSentError] = useState("")
     const {
         register,
@@ -33,9 +34,11 @@ export default function Page() {
             if (!data?.success) {
                 return setServerSentError(data?.message || "Something wen't wrong")
             }
-            window.location.href = "/"
+            window.location.href = searchParams.redirectUrl ?? "/"
         },
     })
+
+    const signinUrl = useCreateUrlWithRedirectParam("/signin")
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -75,7 +78,7 @@ export default function Page() {
                         </Button>
                     </a>
                 </div>
-                <Link className="mx-auto text-sm font-medium text-blue-500" href="/signin">
+                <Link className="mx-auto text-sm font-medium text-blue-500" href={signinUrl}>
                     Already have an account?
                 </Link>
             </form>

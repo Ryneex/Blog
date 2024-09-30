@@ -8,10 +8,6 @@ const roboto = Roboto({ weight: ["100", "300", "400", "500", "700", "900"], subs
 export const metadata: Metadata = {
     title: "Blogy",
     description: "A full featured blog application",
-    openGraph: {
-        type: "website",
-        images: [process.env.DOMAIN + "/favicon.ico"],
-    },
 }
 
 export default function layout({

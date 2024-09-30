@@ -31,7 +31,7 @@ export default function BlogCard({ blog, onSeen }: IProp) {
                 <Link href={`/user/${blog.author.id}`} className="text-xs font-medium text-black/60">
                     <span className="underline">{blog.author.name}</span> | {DateTime.fromJSDate(blog.createdAt).toFormat("dd LLL yyyy")}
                 </Link>
-                <Link href={`/blog/${blog.id}`} className="mb-1 mt-2 block truncate font-semibold text-blue-700 fluid-text-base">
+                <Link href={`/blog/${blog.id}`} className="mb-1 mt-2 block truncate font-semibold text-blue-700 ~text-lg/xl">
                     {blog.title}
                 </Link>
                 <p className="line-clamp-3 text-sm text-black/70">{blog.description}</p>

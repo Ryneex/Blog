@@ -1,9 +1,10 @@
 import { updateAvatar } from "@/actions/user/update/updateAvatar"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
-import { Avatar } from "@nextui-org/react"
+import { Avatar } from "@/components/Avatar"
 import { useRouter } from "next/navigation"
 import { useDropzone } from "react-dropzone"
 import { CiEdit } from "react-icons/ci"
+import { toast } from "sonner"
 
 export default function AvatarUpload({ url, name }: { url: string | null; name: string }) {
     const router = useRouter()
@@ -18,10 +19,15 @@ export default function AvatarUpload({ url, name }: { url: string | null; name: 
             const res = await callActionWithToast(updateAvatar(formData))
             if (res.success) router.refresh()
         },
+        onDropRejected() {
+            toast.error("Image size can't be bigger than 2MB!", {
+                position: "top-center",
+            })
+        },
     })
     return (
         <div className="relative">
-            <Avatar className="!size-32" src={url ?? undefined} name={name} />
+            <Avatar className="!size-32 text-2xl" src={url} name={name} />
             <div
                 className="absolute top-0 grid h-full w-full cursor-pointer place-items-center rounded-full bg-black/80 font-medium tracking-wide text-white opacity-0 duration-300 hover:opacity-100"
                 {...getRootProps()}
@@ -29,7 +35,7 @@ export default function AvatarUpload({ url, name }: { url: string | null; name: 
                 <input {...getInputProps()} />
                 Change
             </div>
-            <CiEdit className="pointer-events-none absolute bottom-2 right-2 size-9 rounded-full bg-blue-500 p-1.5 text-white" />
+            <CiEdit className="pointer-events-none absolute bottom-0 right-0 size-9 rounded-full border-4 border-white bg-blue-500 p-1 text-white" />
         </div>
     )
 }
