@@ -1,11 +1,11 @@
 "use client"
 
 import { Image, ImageProps, Skeleton } from "@nextui-org/react"
-import { useLayoutEffect, useState } from "react"
+import { memo, useLayoutEffect, useState } from "react"
 import { cn } from "./shadcn/utils"
 import { IoCloudOfflineOutline } from "react-icons/io5"
 
-export default function ImageWithFallback(props: ImageProps) {
+function ImageWithFallback(props: ImageProps) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [failedToLoadImage, setFailedToLoadImage] = useState(false)
 
@@ -31,3 +31,5 @@ export default function ImageWithFallback(props: ImageProps) {
         </div>
     )
 }
+
+export default memo(ImageWithFallback)

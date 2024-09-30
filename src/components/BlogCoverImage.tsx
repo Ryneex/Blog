@@ -3,12 +3,12 @@
 import { useDropzone } from "react-dropzone"
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react"
 import { Input } from "./shadcn/ui/input"
-import { useState } from "react"
+import { memo, useState } from "react"
 import Alert from "./Alert"
 import { SlCloudUpload } from "react-icons/sl"
 import ImageWithFallback from "./ImageWithFallback"
 
-export default function BlogCoverImage({ src, onValueChange, isPreview }: { src?: string; onValueChange?(image: string | File): any; isPreview?: boolean }) {
+function BlogCoverImage({ src, onValueChange, isPreview }: { src?: string; onValueChange?(image: string | File): any; isPreview?: boolean }) {
     const [imageUrl, setImageUrl] = useState<string | undefined>(src)
     const [inputImageUrl, setInputImageUrl] = useState("")
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -84,3 +84,5 @@ export default function BlogCoverImage({ src, onValueChange, isPreview }: { src?
         </div>
     )
 }
+
+export default memo(BlogCoverImage)

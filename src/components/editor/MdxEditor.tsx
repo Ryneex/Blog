@@ -28,9 +28,9 @@ import "@mdxeditor/editor/style.css"
 import CodeBlock from "./CodeBlock"
 import InsertImageDialog from "./InsertImageDialog"
 import { MdContentPasteGo } from "react-icons/md"
-import { useRef } from "react"
+import { memo, useRef } from "react"
 
-export default function MdxEditor({ content, onValueChange }: { content: string; onValueChange: (value: string) => unknown }) {
+function MdxEditor({ content, onValueChange }: { content: string; onValueChange: (value: string) => unknown }) {
     const mdxEditor = useRef<MDXEditorMethods>(null)
     return (
         <div className="prose max-w-none rounded-md border prose-h1:font-bold">
@@ -93,3 +93,5 @@ export default function MdxEditor({ content, onValueChange }: { content: string;
         </div>
     )
 }
+
+export default memo(MdxEditor)

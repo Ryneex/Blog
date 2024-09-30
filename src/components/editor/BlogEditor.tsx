@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import CoverImage from "../BlogCoverImage"
+import BlogCoverImage from "../BlogCoverImage"
 import { Button, Spinner } from "@nextui-org/react"
 import { blogValidation } from "@/validations/blog"
 import { toast } from "sonner"
@@ -53,7 +53,7 @@ export default function BlogEditor({ initialData }: { initialData?: blogs }) {
                 <Button onClick={publish} className="absolute right-2 top-2 z-10 h-9 rounded-full" color="primary">
                     {initialData ? "Save" : "Publish"}
                 </Button>
-                <CoverImage onValueChange={setCover} src={initialData?.coverUrl} />
+                <BlogCoverImage onValueChange={setCover} src={initialData?.coverUrl} />
             </div>
             <EditorHeader initialValue={title} onValueChange={setTitle} />
             <MdxEditor content={content} onValueChange={setContent} />
