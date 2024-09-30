@@ -2,7 +2,7 @@
 
 import { likeComment } from "@/actions/comment/likeComment"
 import { cn } from "@/components/shadcn/utils"
-import React, { useState } from "react"
+import { useState } from "react"
 import { AiFillLike, AiOutlineLike } from "react-icons/ai"
 
 export default function BlogCommentLikeCount({ likes, liked, commentId, isLoggedIn }: { likes: number; liked: boolean; commentId: string; isLoggedIn: boolean }) {

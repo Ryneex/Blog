@@ -4,7 +4,7 @@ import { getBlogsByUserId } from "@/actions/blog/getBlogsByUserId"
 import BlogCard from "@/components/BlogCard"
 import { IBlogCardInfo } from "@/types/blog"
 import { Spinner } from "@nextui-org/react"
-import React, { useState } from "react"
+import { useState } from "react"
 
 export default function ProfileInfiniteBlogScroll({ initialData, userId }: { initialData: IBlogCardInfo[]; userId: string }) {
     const [blogs, setBlogs] = useState(initialData)

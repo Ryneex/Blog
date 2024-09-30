@@ -1,7 +1,7 @@
 import { getColorBasedOnText } from "@/lib/utils/getColorBasedOnText"
 import { AvatarProps, Avatar as Nextui_Avatar } from "@nextui-org/react"
-import React from "react"
 import { cn } from "./shadcn/utils"
+import { forwardRef } from "react"
 
 type Props = Omit<AvatarProps, "src"> & {
     src?: string | null
@@ -20,4 +20,4 @@ function AvatarComponent(props: Props, ref: React.Ref<HTMLSpanElement>) {
     )
 }
 
-export const Avatar = React.forwardRef(AvatarComponent)
+export const Avatar = forwardRef(AvatarComponent)
