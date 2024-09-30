@@ -1,9 +1,10 @@
 import { nextui } from "@nextui-org/react"
 import type { Config } from "tailwindcss"
+import fluid, { extract, screens } from "fluid-tailwind"
 
 const config = {
     darkMode: ["class"],
-    content: ["./src/**/*.{ts,tsx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
+    content: { files: ["./src/**/*.{ts,tsx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"], extract },
     theme: {
         extend: {
             keyframes: {
@@ -21,17 +22,12 @@ const config = {
                 "accordion-up": "accordion-up 0.2s ease-out",
             },
         },
+        screens,
     },
     corePlugins: {
         container: false,
     },
-    plugins: [
-        nextui(),
-        require("@tailwindcss/typography"),
-        require("tailwindcss-fluid-type")({
-            settings: { prefix: "fluid-" },
-        }),
-    ],
+    plugins: [nextui(), require("@tailwindcss/typography"), fluid],
 } satisfies Config
 
 export default config
