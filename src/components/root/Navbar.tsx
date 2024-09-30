@@ -21,7 +21,7 @@ export default function Navbar({ user }: { user: IPrivateUser | null }) {
             <nav className="container flex h-12 items-center justify-between sm:h-16">
                 <Link href="/" className="flex items-center gap-1 text-xl font-medium text-blue-800">
                     <RiBloggerLine size={28} />
-                    Blog
+                    Blogy
                 </Link>
                 {!user ? (
                     <div className="flex gap-3">
