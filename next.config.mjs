@@ -1,3 +1,5 @@
+import withPNR from "preload-next-routes"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
@@ -5,4 +7,4 @@ const nextConfig = {
     },
 }
 
-export default nextConfig
+export default withPNR(nextConfig)
