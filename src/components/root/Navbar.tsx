@@ -9,7 +9,7 @@ import { FiUser } from "react-icons/fi"
 import { logout } from "@/actions/user/auth/logout"
 import { usePathname, useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover"
-import { GearIcon } from "@radix-ui/react-icons"
+import { GoGear } from "react-icons/go"
 import { IPrivateUser } from "@/types/user"
 import { getColorBasedOnText } from "@/lib/utils/getColorBasedOnText"
 import { Avatar } from "@/components/Avatar"
@@ -74,7 +74,7 @@ function ProfilePopover({ user }: { user: IPrivateUser }) {
                     <ListboxItem onClick={onClose} as={Link} href={`/user/${user.id}`} startContent={<FiUser className="mb-0.5" />} key="Profile">
                         Your Profile
                     </ListboxItem>
-                    <ListboxItem onClick={onClose} href="/settings" as={Link} showDivider startContent={<GearIcon className="mb-0.5" />} key="Settings">
+                    <ListboxItem onClick={onClose} href="/settings" as={Link} showDivider startContent={<GoGear className="mb-0.5" />} key="Settings">
                         Settings
                     </ListboxItem>
                     <ListboxItem
