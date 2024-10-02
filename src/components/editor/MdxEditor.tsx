@@ -23,11 +23,11 @@ import {
     codeBlockPlugin,
     InsertCodeBlock,
     MDXEditorMethods,
+    CodeToggle,
 } from "@mdxeditor/editor"
 import "@mdxeditor/editor/style.css"
 import CodeBlock from "./CodeBlock"
 import InsertImageDialog from "./InsertImageDialog"
-import { MdContentPasteGo } from "react-icons/md"
 import { memo, useRef } from "react"
 
 function MdxEditor({ content, onValueChange }: { content: string; onValueChange: (value: string) => unknown }) {
@@ -49,6 +49,7 @@ function MdxEditor({ content, onValueChange }: { content: string; onValueChange:
                                     <Separator />
                                     <ListsToggle />
                                     <InsertCodeBlock />
+                                    <CodeToggle />
                                     <Separator />
                                     <CreateLink />
                                     <InsertImage />
@@ -56,13 +57,6 @@ function MdxEditor({ content, onValueChange }: { content: string; onValueChange:
                                     <Separator />
                                     <InsertThematicBreak />
                                     <Separator />
-                                    <MdContentPasteGo
-                                        onClick={async () => {
-                                            mdxEditor.current?.setMarkdown(await navigator.clipboard.readText())
-                                        }}
-                                        size={22}
-                                        className="ml-auto"
-                                    />
                                 </div>
                             )
                         },
