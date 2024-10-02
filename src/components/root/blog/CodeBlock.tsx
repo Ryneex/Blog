@@ -65,5 +65,5 @@ export default async function CodeBlock({ code, language }: { code: string; lang
 
     const highlighter = await getSingletonHighlighter({ langs: [language], themes: ["github-light", theme] })
     const html = highlighter.codeToHtml(code, { lang: language, theme: "custom-theme" })
-    return <div className="mt-5 overflow-hidden rounded-lg bg-[#005dc70d] p-3 text-[1rem]" dangerouslySetInnerHTML={{ __html: html }}></div>
+    return <div className="mt-5 overflow-hidden rounded-lg bg-[#005dc70d] p-3" dangerouslySetInnerHTML={{ __html: html }}></div>
 }

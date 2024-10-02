@@ -36,7 +36,17 @@ export default async function BlogPreview({ data }: { data: IProps }) {
             <EditorHeader className="mb-5 border-b" isPreview initialValue={data.title} />
             <Markdown
                 className="prose max-w-none rounded-md prose-h1:font-bold prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0"
-                components={{ code: ({ className, children }) => <CodeBlock code={children?.toString() || ""} language={className?.replace("language-", "") || "text"} /> }}
+                components={{
+                    pre: ({ children }) => {
+                        if (children !== null && typeof children === "object" && "props" in children) {
+                            return <CodeBlock code={children.props.children?.toString() || ""} language={children.props.className?.replace("language-", "") || "text"} />
+                        }
+                        return <div>{children}</div>
+                    },
+                    code: ({ children }) => {
+                        return <span className="rounded-lg bg-gray-200 px-2 py-0.5">{children}</span>
+                    },
+                }}
             >
                 {data.content}
             </Markdown>
