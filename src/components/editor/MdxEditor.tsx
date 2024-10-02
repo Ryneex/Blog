@@ -30,6 +30,7 @@ import "@mdxeditor/editor/style.css"
 import CodeBlock from "./CodeBlock"
 import InsertImageDialog from "./InsertImageDialog"
 import { memo, useRef } from "react"
+import LinkDialog from "./LinkDialog"
 
 function MdxEditor({ content, onValueChange }: { content: string; onValueChange: (value: string) => unknown }) {
     const mdxEditor = useRef<MDXEditorMethods>(null)
@@ -73,7 +74,7 @@ function MdxEditor({ content, onValueChange }: { content: string; onValueChange:
                         ImageDialog: InsertImageDialog,
                     }),
                     linkPlugin(),
-                    linkDialogPlugin({}),
+                    linkDialogPlugin({ LinkDialog }),
                     tablePlugin(),
                     thematicBreakPlugin(),
                     codeBlockPlugin({
