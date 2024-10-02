@@ -44,7 +44,7 @@ export default async function BlogPreview({ data }: { data: IProps }) {
                         return <div>{children}</div>
                     },
                     code: ({ children }) => {
-                        return <span className="rounded-lg bg-gray-200 px-2 py-0.5">{children}</span>
+                        return <span className="mx-1 rounded-md border border-zinc-300 bg-zinc-200 px-1 font-mono">{children}</span>
                     },
                 }}
             >

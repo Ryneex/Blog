@@ -5,3 +5,13 @@
 .container {
     @apply mx-auto w-full max-w-[1400px] px-[1rem] sm:px-[2rem];
 }
+
+/* Overwriting styles for mdxeditor */
+.mdxeditor code::before,
+.mdxeditor code::after {
+    content: none;
+}
+
+.mdxeditor code {
+    @apply mx-1 rounded-md border border-zinc-300 bg-zinc-200 px-0.5 text-base font-medium text-black;
+}
