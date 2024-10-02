@@ -24,6 +24,7 @@ import {
     InsertCodeBlock,
     MDXEditorMethods,
     CodeToggle,
+    StrikeThroughSupSubToggles,
 } from "@mdxeditor/editor"
 import "@mdxeditor/editor/style.css"
 import CodeBlock from "./CodeBlock"
@@ -43,9 +44,11 @@ function MdxEditor({ content, onValueChange }: { content: string; onValueChange:
                     toolbarPlugin({
                         toolbarContents: () => {
                             return (
-                                <div className="flex w-full items-center">
+                                <>
                                     <BlockTypeSelect />
                                     <BoldItalicUnderlineToggles />
+                                    <Separator />
+                                    <StrikeThroughSupSubToggles />
                                     <Separator />
                                     <ListsToggle />
                                     <InsertCodeBlock />
@@ -57,7 +60,7 @@ function MdxEditor({ content, onValueChange }: { content: string; onValueChange:
                                     <Separator />
                                     <InsertThematicBreak />
                                     <Separator />
-                                </div>
+                                </>
                             )
                         },
                     }),
@@ -70,7 +73,7 @@ function MdxEditor({ content, onValueChange }: { content: string; onValueChange:
                         ImageDialog: InsertImageDialog,
                     }),
                     linkPlugin(),
-                    linkDialogPlugin({ onClickLinkCallback: () => {} }),
+                    linkDialogPlugin({}),
                     tablePlugin(),
                     thematicBreakPlugin(),
                     codeBlockPlugin({

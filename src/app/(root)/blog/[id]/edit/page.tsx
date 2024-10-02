@@ -8,9 +8,5 @@ export default async function page({ params: { id } }: { params: { [x: string]: 
     if (!user) return redirect("/")
     const blog = await client.blogs.findFirst({ where: { id, authorId: user.id } })
     if (!blog) return notFound()
-    return (
-        <div className="h-full overflow-auto">
-            <BlogEditor initialData={blog} />
-        </div>
-    )
+    return <BlogEditor initialData={blog} />
 }

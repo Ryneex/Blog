@@ -48,15 +48,17 @@ export default function BlogEditor({ initialData }: { initialData?: blogs }) {
     }
 
     return (
-        <div className="container mt-10 flex !max-w-4xl flex-col overflow-hidden rounded-md bg-white pb-5">
-            <div className="relative aspect-[10/4] shrink-0 overflow-hidden">
-                <Button onClick={publish} className="absolute right-2 top-2 z-10 h-9 rounded-full" color="primary">
-                    {initialData ? "Save" : "Publish"}
-                </Button>
-                <BlogCoverImage onValueChange={setCover} src={initialData?.coverUrl} />
+        <div className="overflow-auto">
+            <div className="container mt-10 flex !max-w-4xl flex-col rounded-md bg-white pb-5 pt-8">
+                <div className="relative aspect-[10/4] shrink-0 overflow-hidden">
+                    <Button onClick={publish} className="absolute right-2 top-2 z-10 h-9 rounded-full" color="primary">
+                        {initialData ? "Save" : "Publish"}
+                    </Button>
+                    <BlogCoverImage onValueChange={setCover} src={initialData?.coverUrl} />
+                </div>
+                <EditorHeader initialValue={title} onValueChange={setTitle} />
+                <MdxEditor content={content} onValueChange={setContent} />
             </div>
-            <EditorHeader initialValue={title} onValueChange={setTitle} />
-            <MdxEditor content={content} onValueChange={setContent} />
         </div>
     )
 }
