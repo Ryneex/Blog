@@ -4,6 +4,8 @@ import { IBlogCardInfo } from "@/types/blog"
 import { DateTime } from "luxon"
 import Link from "next/link"
 import { useEffect, useRef } from "react"
+import NoSSR from "./NoSSR"
+import { Skeleton } from "@nextui-org/react"
 
 type IProp = {
     blog: IBlogCardInfo
@@ -28,8 +30,12 @@ export default function BlogCard({ blog, onSeen }: IProp) {
                 <img className="h-full w-full object-cover duration-300 hover:scale-110" src={blog.coverUrl} alt="" />
             </Link>
             <div className="p-3 !pt-2 text-black/80 sm:p-5">
-                <Link href={`/user/${blog.author.id}`} className="text-xs font-medium text-black/60">
-                    <span className="underline">{blog.author.name}</span> | {DateTime.fromJSDate(blog.createdAt).toFormat("dd LLL yyyy")}
+                <Link href={`/user/${blog.author.id}`} className="flex items-center gap-1 text-xs font-medium text-black/60">
+                    <span className="underline">{blog.author.name}</span>
+                    <span> - </span>
+                    <NoSSR fallback={<Skeleton className="h-3 w-20 rounded-md" />}>
+                        <time>{DateTime.fromJSDate(blog.createdAt).toFormat("dd LLL yyyy")}</time>
+                    </NoSSR>
                 </Link>
                 <Link href={`/blog/${blog.id}`} className="mb-1 mt-2 block truncate font-semibold text-blue-700 ~text-lg/xl">
                     {blog.title}

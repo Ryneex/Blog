@@ -1,11 +1,12 @@
 "use client"
 
-import { BreadcrumbItem, Breadcrumbs, Button, Chip } from "@nextui-org/react"
+import { BreadcrumbItem, Breadcrumbs, Button, Chip, Skeleton } from "@nextui-org/react"
 import { FaDesktop } from "react-icons/fa"
 import { sessions } from "@prisma/client"
 import { DateTime } from "luxon"
 import { deleteOtherSessions } from "@/actions/user/auth/deleteOtherSessions"
 import { useRouter } from "next/navigation"
+import NoSSR from "@/components/NoSSR"
 
 export default function SecuritySettings({ sessions }: { sessions: (Omit<sessions, "id"> & { isCurrent: boolean })[] }) {
     const router = useRouter()
@@ -43,11 +44,18 @@ export default function SecuritySettings({ sessions }: { sessions: (Omit<session
                                         </Chip>
                                     )}
                                 </div>
-                                {/* prettier-ignore */}
                                 <div className="flex flex-col text-[13px] font-medium leading-tight text-black/50">
-                                    <span>{e.info.browser} | {e.info.browserVersion}</span>
-                                    <span>{e.ip} | ({e.info.location ?? "Location not found"})</span>
-                                    <span>{DateTime.fromJSDate(e.createdAt).toFormat("D")} @ {DateTime.fromJSDate(e.createdAt).toFormat("tt")}</span>
+                                    <span>
+                                        {e.info.browser} | {e.info.browserVersion}
+                                    </span>
+                                    <span>
+                                        {e.ip} | ({e.info.location ?? "Location not found"})
+                                    </span>
+                                    <NoSSR fallback={<Skeleton className="w-36 rounded-full">_</Skeleton>}>
+                                        <time suppressHydrationWarning>
+                                            {DateTime.fromJSDate(e.createdAt).toFormat("D")} @ {DateTime.fromJSDate(e.createdAt).toFormat("tt")}
+                                        </time>
+                                    </NoSSR>
                                 </div>
                             </div>
                         </div>
