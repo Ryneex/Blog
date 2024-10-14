@@ -1,0 +1,20 @@
+{
+    "name": "blog",
+    "version": "1.0.0",
+    "description": "This is a simple blog application created using Next.js",
+    "scripts": {
+        "dev": "pnpm --filter www dev",
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "prettier": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.6.8"
+    },
+    "keywords": [
+        "blog",
+        "nextjs",
+        "monorepo"
+    ],
+    "author": "MI Sajid",
+    "license": "MIT"
+}
