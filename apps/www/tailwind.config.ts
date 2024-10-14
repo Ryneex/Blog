@@ -4,7 +4,7 @@ import fluid, { extract, screens } from "fluid-tailwind"
 
 const config = {
     darkMode: ["class"],
-    content: { files: ["./src/**/*.{ts,tsx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"], extract },
+    content: { files: ["./src/**/*.{ts,tsx}", "../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"], extract },
     theme: {
         extend: {
             keyframes: {
