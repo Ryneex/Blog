@@ -7,7 +7,7 @@ export default async function layout({ children }: { children: React.ReactNode }
     if (!res.success) return redirect("/")
     return (
         <div className="overflow-auto">
-            <div className="container gap-10 ~pb-2/5 sm:flex">
+            <div className="~pb-2/5 container gap-10 sm:flex">
                 <Sidebar />
                 {children}
             </div>

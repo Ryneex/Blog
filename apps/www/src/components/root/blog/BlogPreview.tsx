@@ -35,7 +35,7 @@ export default async function BlogPreview({ data }: { data: IProps }) {
             </div>
             <EditorHeader className="mb-5 border-b" isPreview initialValue={data.title} />
             <Markdown
-                className="prose max-w-none rounded-md prose-h1:font-bold prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0"
+                className="prose prose-h1:font-bold prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 max-w-none rounded-md"
                 components={{
                     pre: ({ children }) => {
                         if (children !== null && typeof children === "object" && "props" in children) {

@@ -11,7 +11,7 @@ export default async function page() {
     const { name, email, bio, avatarUrl, password } = user
 
     return (
-        <div className="w-full ~py-2/5">
+        <div className="~py-2/5 w-full">
             <AccountSettings userData={{ name, email, bio, avatarUrl }} />
             <hr className="my-6" />
             <UpdatePassword hasPassword={!!password} />

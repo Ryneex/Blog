@@ -11,7 +11,7 @@ import NoSSR from "@/components/NoSSR"
 export default function SecuritySettings({ sessions }: { sessions: (Omit<sessions, "id"> & { isCurrent: boolean })[] }) {
     const router = useRouter()
     return (
-        <div className="w-full ~py-2/5">
+        <div className="~py-2/5 w-full">
             <Breadcrumbs className="hidden sm:block">
                 <BreadcrumbItem>Settings</BreadcrumbItem>
                 <BreadcrumbItem>Account</BreadcrumbItem>
