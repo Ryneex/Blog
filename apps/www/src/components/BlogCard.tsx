@@ -37,7 +37,7 @@ export default function BlogCard({ blog, onSeen }: IProp) {
                         <time>{DateTime.fromJSDate(blog.createdAt).toFormat("dd LLL yyyy")}</time>
                     </NoSSR>
                 </Link>
-                <Link href={`/blog/${blog.id}`} className="mb-1 mt-2 block truncate font-semibold text-blue-700 ~text-lg/xl">
+                <Link href={`/blog/${blog.id}`} className="~text-lg/xl mb-1 mt-2 block truncate font-semibold text-blue-700">
                     {blog.title}
                 </Link>
                 <p className="line-clamp-3 text-sm text-black/70">{blog.description}</p>

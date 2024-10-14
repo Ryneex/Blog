@@ -49,7 +49,7 @@ export default async function page({ params: { id } }: { params: { id: string } 
                             </Link>
                         </div>
                         <div className="flex -translate-y-10 flex-col items-center pt-3 sm:-translate-y-0 sm:items-start">
-                            <span className="pb-2 font-medium ~text-xl/2xl">{user.name}</span>
+                            <span className="~text-xl/2xl pb-2 font-medium">{user.name}</span>
                             <div className="flex items-center gap-5 text-sm font-medium text-black/70">
                                 <span>{user._count.blogs} Blogs</span>
                                 <span>{user._count.comments} Comments</span>

@@ -35,7 +35,7 @@ import LinkDialog from "./LinkDialog"
 function MdxEditor({ content, onValueChange }: { content: string; onValueChange: (value: string) => unknown }) {
     const mdxEditor = useRef<MDXEditorMethods>(null)
     return (
-        <div className="prose max-w-none rounded-md border prose-h1:font-bold">
+        <div className="prose prose-h1:font-bold max-w-none rounded-md border">
             <MDXEditor
                 ref={mdxEditor}
                 markdown={content}

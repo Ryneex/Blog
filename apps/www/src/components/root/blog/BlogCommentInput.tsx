@@ -38,7 +38,7 @@ export default function BlogCommentInput({ blogId, isLoggedIn }: { blogId: strin
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 minRows={isFocused ? 5 : undefined}
-                className="block h-[38px] w-full resize-none overflow-hidden rounded-3xl border border-gray-300 bg-white/30 px-3 py-2 text-sm duration-200 transition-height placeholder:text-black/70 focus:outline-none"
+                className="transition-height block h-[38px] w-full resize-none overflow-hidden rounded-3xl border border-gray-300 bg-white/30 px-3 py-2 text-sm duration-200 placeholder:text-black/70 focus:outline-none"
                 placeholder="Add a comment"
             />
             {isFocused && (

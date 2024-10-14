@@ -24,7 +24,7 @@ export default function Sidebar() {
     ]
 
     return (
-        <div className="sticky top-0 z-10 h-fit w-full shrink-0 bg-gray-50 ~py-2/5 sm:max-w-[180px] lg:max-w-[230px]">
+        <div className="~py-2/5 sticky top-0 z-10 h-fit w-full shrink-0 bg-gray-50 sm:max-w-[180px] lg:max-w-[230px]">
             <h1 className="mb-2 hidden text-lg font-medium sm:block">Settings</h1>
             <Listbox className="hidden text-black/70 sm:block" aria-label="Settings tab">
                 {links.map((e, i) => (

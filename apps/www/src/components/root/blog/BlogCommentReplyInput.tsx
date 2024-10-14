@@ -25,7 +25,7 @@ export default function BlogCommentReplyInput({ parentId, onCancel }: { parentId
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 minRows={3}
-                className="block h-[38px] w-full resize-none overflow-hidden rounded-3xl border border-gray-300 bg-white/30 px-3 py-2 text-sm duration-300 transition-height placeholder:text-black/70 focus:outline-none"
+                className="transition-height block h-[38px] w-full resize-none overflow-hidden rounded-3xl border border-gray-300 bg-white/30 px-3 py-2 text-sm duration-300 placeholder:text-black/70 focus:outline-none"
                 placeholder="Add a reply"
             />
             <div className="absolute bottom-2 right-2 flex gap-2">

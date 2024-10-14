@@ -48,7 +48,7 @@ export default function AccountSettings({ userData }: { userData: { name: string
                 <BreadcrumbItem>Account</BreadcrumbItem>
             </Breadcrumbs>
             <h1 className="mt-3 text-2xl font-medium text-black/70">Account Settings</h1>
-            <div className="flex flex-col gap-5 ~mt-3/5">
+            <div className="~mt-3/5 flex flex-col gap-5">
                 <div className="w-fit space-y-1">
                     <span className="text-sm font-medium text-black/80">Profile Avatar</span>
                     <AvatarUpload url={userData.avatarUrl} name={userData.name} />
