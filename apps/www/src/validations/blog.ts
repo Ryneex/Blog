@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { createEditor } from "@blog/editor"
 
 const validation = {
     cover: z.custom<string | File>((e) => {
@@ -10,7 +11,14 @@ const validation = {
         return false
     }, "Invalid cover image"),
     title: z.string().trim().min(10, "title must be more than 10 chars").max(100, "title must be less than 100 chars"),
-    content: z.string(),
+    content: z.custom<string>((val) => {
+        try {
+            createEditor({ value: JSON.parse(val) })
+            return val
+        } catch (error) {
+            return false
+        }
+    }),
 }
 
 export const blogValidation = z.object(validation)
