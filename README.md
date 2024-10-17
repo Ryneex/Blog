@@ -1,6 +1,6 @@
 # Blog Application
 
-This is a simple blog application created using Next.js.
+This is a simple blog application created using Next.js monorepo.
 
 ## Getting Started
 
