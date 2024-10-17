@@ -2,20 +2,59 @@
     "name": "@blog/editor",
     "version": "1.0.0",
     "description": "",
-    "main": "src/index.ts",
+    "exports": {
+        ".": "./src/index.ts",
+        "./react": "./src/react.ts"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": [],
-    "author": "MI Sajid",
-    "license": "MIT",
+    "dependencies": {
+        "@ariakit/react": "^0.4.13",
+        "@radix-ui/react-checkbox": "^1.1.2",
+        "@radix-ui/react-dialog": "^1.1.2",
+        "@radix-ui/react-dropdown-menu": "^2.1.2",
+        "@radix-ui/react-popover": "^1.1.2",
+        "@radix-ui/react-separator": "^1.1.0",
+        "@radix-ui/react-slot": "^1.1.0",
+        "@radix-ui/react-toolbar": "^1.1.0",
+        "@radix-ui/react-tooltip": "^1.1.3",
+        "@udecode/cn": "^39.0.0",
+        "@udecode/plate-basic-marks": "^39.0.0",
+        "@udecode/plate-block-quote": "^39.0.0",
+        "@udecode/plate-break": "^39.0.0",
+        "@udecode/plate-caption": "^39.0.0",
+        "@udecode/plate-code-block": "^39.0.0",
+        "@udecode/plate-combobox": "^39.0.0",
+        "@udecode/plate-common": "^39.1.8",
+        "@udecode/plate-emoji": "^39.0.0",
+        "@udecode/plate-floating": "^39.1.6",
+        "@udecode/plate-font": "^39.0.0",
+        "@udecode/plate-heading": "^39.0.0",
+        "@udecode/plate-indent": "^39.0.0",
+        "@udecode/plate-indent-list": "^39.1.10",
+        "@udecode/plate-line-height": "^39.0.0",
+        "@udecode/plate-link": "^39.1.9",
+        "@udecode/plate-list": "^39.0.0",
+        "@udecode/plate-markdown": "^39.1.5",
+        "@udecode/plate-media": "^39.0.0",
+        "@udecode/plate-reset-node": "^39.0.0",
+        "@udecode/plate-resizable": "^39.1.6",
+        "@udecode/plate-selection": "^39.1.4",
+        "@udecode/plate-table": "^39.1.6",
+        "class-variance-authority": "^0.7.0",
+        "cmdk": "^1.0.0",
+        "lucide-react": "^0.452.0",
+        "prismjs": "^1.29.0",
+        "slate": "^0.103.0",
+        "slate-react": "^0.110.1",
+        "tailwind-merge": "^2.4.0"
+    },
     "devDependencies": {
+        "@types/prismjs": "^1.26.4",
         "@types/react": "^18.3.3"
     },
-    "dependencies": {
-        "@udecode/cn": "^39.0.0",
-        "class-variance-authority": "^0.7.0",
-        "lucide-react": "^0.452.0",
-        "tailwind-merge": "^2.4.0"
-    }
+    "keywords": [],
+    "author": "MI Sajid",
+    "license": "MIT"
 }
