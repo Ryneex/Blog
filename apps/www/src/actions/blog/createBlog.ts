@@ -1,12 +1,12 @@
 "use server"
 
+import { generateBlogDescription } from "@/helpers/generateBlogDescription"
 import { getCoverUrl } from "@/helpers/getCoverUrl"
 import { sendError } from "@/helpers/sendError"
 import { auth } from "@/lib/auth"
 import { client } from "@/lib/prismaClient"
 import { blogValidation } from "@/validations/blog"
 import { createId } from "@paralleldrive/cuid2"
-import { markdownToTxt } from "markdown-to-txt"
 
 export async function createBlog(formData: FormData) {
     try {
@@ -17,8 +17,8 @@ export async function createBlog(formData: FormData) {
         if (!res.success) return sendError("Bad Request")
         const { title, content, cover } = validate.data
 
-        // Creating small description from markdown content
-        const description = markdownToTxt(validate.data.content).substring(0, 200)
+        // Creating small description from editor content
+        const description = generateBlogDescription(content)
 
         const blogId = createId()
         const coverResponse = await getCoverUrl(cover, blogId)
