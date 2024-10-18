@@ -63,7 +63,7 @@ export default async function page({ params: { id } }: { params: { id: string } 
                             {user.bio && <hr className="my-1.5 w-full" />}
                             <span className="text-sm text-black/80">{user.bio}</span>
                         </div>
-                        {currentUser?.id === result?.id && (
+                        {currentUser?.id === result.id && (
                             <Button as={Link} href="/settings" className="ml-auto mt-4 hidden h-8 rounded-full sm:flex" color="primary" variant="solid" startContent={<FiEdit2 />}>
                                 Edit
                             </Button>
