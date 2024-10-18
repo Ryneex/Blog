@@ -14,6 +14,7 @@ import RecentBlogs from "@/components/root/user/RecentBlogs"
 
 export default async function page({ params: { id } }: { params: { id: string } }) {
     const { user: currentUser } = await getCurrentUser()
+
     const result = await client.users.findUnique({
         where: { id },
         select: {
@@ -25,6 +26,7 @@ export default async function page({ params: { id } }: { params: { id: string } 
             _count: { select: { blogs: true, comments: true } },
         },
     })
+
     if (!result) return <NotFound />
 
     const { blogs, ...rest } = result
@@ -44,9 +46,13 @@ export default async function page({ params: { id } }: { params: { id: string } 
                     <div className="flex flex-col items-center px-5 sm:flex-row sm:items-start sm:gap-10">
                         <div className="relative z-10 -translate-y-1/3">
                             <Avatar className="z-10 !size-36 border-[7px] border-white text-4xl font-bold sm:!size-44" src={user.avatarUrl} name={user.name} />
-                            <Link className="absolute bottom-3 right-2 z-10" href="/settings">
-                                <CiEdit className="size-9 rounded-full border-4 border-white bg-blue-500 p-1 text-white hover:bg-blue-600" />
-                            </Link>
+
+                            {/* checking if the current user is the owner of the profile */}
+                            {currentUser?.id === result.id && (
+                                <Link className="absolute bottom-3 right-2 z-10" href="/settings">
+                                    <CiEdit className="size-9 rounded-full border-4 border-white bg-blue-500 p-1 text-white hover:bg-blue-600" />
+                                </Link>
+                            )}
                         </div>
                         <div className="flex -translate-y-10 flex-col items-center pt-3 sm:-translate-y-0 sm:items-start">
                             <span className="~text-xl/2xl pb-2 font-medium">{user.name}</span>
@@ -57,7 +63,7 @@ export default async function page({ params: { id } }: { params: { id: string } 
                             {user.bio && <hr className="my-1.5 w-full" />}
                             <span className="text-sm text-black/80">{user.bio}</span>
                         </div>
-                        {currentUser?.id === id && (
+                        {currentUser?.id === result?.id && (
                             <Button as={Link} href="/settings" className="ml-auto mt-4 hidden h-8 rounded-full sm:flex" color="primary" variant="solid" startContent={<FiEdit2 />}>
                                 Edit
                             </Button>
