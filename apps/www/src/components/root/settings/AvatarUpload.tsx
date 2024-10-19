@@ -1,7 +1,7 @@
 import { updateAvatar } from "@/actions/user/update/updateAvatar"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { Avatar } from "@/components/Avatar"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { useDropzone } from "react-dropzone"
 import { CiEdit } from "react-icons/ci"
 import { toast } from "sonner"

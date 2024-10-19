@@ -4,7 +4,7 @@ import TextareaAutosize from "react-textarea-autosize"
 import { useState } from "react"
 import { Button } from "@nextui-org/react"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { replyToComment } from "@/actions/comment/replyToComment"
 
 export default function BlogCommentReplyInput({ parentId, onCancel }: { parentId: string; onCancel(): void }) {

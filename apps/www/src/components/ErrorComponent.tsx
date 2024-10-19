@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@nextui-org/react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 
 export default function ErrorComponent({ error, resetErrorBoundary }: { error?: Error | string; resetErrorBoundary?: () => void }) {
     const router = useRouter()
