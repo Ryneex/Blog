@@ -5,7 +5,7 @@ import { FaDesktop } from "react-icons/fa"
 import { sessions } from "@prisma/client"
 import { DateTime } from "luxon"
 import { deleteOtherSessions } from "@/actions/user/auth/deleteOtherSessions"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import NoSSR from "@/components/NoSSR"
 
 export default function SecuritySettings({ sessions }: { sessions: (Omit<sessions, "id"> & { isCurrent: boolean })[] }) {

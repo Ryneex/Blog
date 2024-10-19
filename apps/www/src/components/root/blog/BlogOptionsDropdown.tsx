@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs"
 import { deleteBlog } from "@/actions/blog/deleteBlog"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { FiTrash } from "react-icons/fi"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 
 export default function BlogOptionsDropdown({ blogId, authorId, currentUserId }: { blogId: string; authorId: string; currentUserId?: string }) {
     const router = useRouter()

@@ -5,7 +5,7 @@ import { Input } from "@/components/shadcn/ui/input"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { passwordValidation } from "@/validations/user"
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { useState } from "react"
 
 export default function DeleteAccount({ hasPassword }: { hasPassword: boolean }) {

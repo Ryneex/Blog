@@ -3,7 +3,7 @@
 import { deleteComment } from "@/actions/comment/deleteComment"
 import { deleteReply } from "@/actions/comment/deleteReply"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { FaTrash } from "react-icons/fa"
 
 export default function CommentDeleteButton({ commentId, isReply = false }: { commentId: string; isReply?: false }) {

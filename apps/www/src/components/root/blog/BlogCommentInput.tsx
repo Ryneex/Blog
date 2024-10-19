@@ -5,7 +5,7 @@ import { useRef, useState } from "react"
 import { Button } from "@nextui-org/react"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { comment } from "@/actions/comment/comment"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 
 export default function BlogCommentInput({ blogId, isLoggedIn }: { blogId: string; isLoggedIn: boolean }) {
     const [isFocused, setIsFocused] = useState(false)

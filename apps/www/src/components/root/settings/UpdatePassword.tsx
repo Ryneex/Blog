@@ -5,7 +5,7 @@ import { Input } from "@/components/shadcn/ui/input"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { updatePasswordValidation } from "@/validations/user"
 import { Button } from "@nextui-org/react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { useEffect, useState } from "react"
 
 export default function UpdatePassword({ hasPassword }: { hasPassword: boolean }) {

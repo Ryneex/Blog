@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { updateUserValidation } from "@/validations/user"
 import { callActionWithToast } from "@/helpers/callActionWithToast"
 import { updateProfile } from "@/actions/user/update/updateProfile"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 
 const isEqual = (obj: object, obj2: object) => JSON.stringify(obj) === JSON.stringify(obj2)
 
