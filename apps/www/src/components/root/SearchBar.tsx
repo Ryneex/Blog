@@ -9,7 +9,7 @@ import { useRouter } from "next-nprogress-bar"
 export default function SearchBar() {
     const router = useRouter()
     const [input, setInput] = useState(useSearchParams().get("q") ?? "")
-    const submit = () => router.push(`/?q=${input}`)
+    const submit = () => router.push(input.length ? `/?q=${input}` : "/")
 
     return (
         <div className="flex w-full items-center gap-2">
