@@ -1,9 +1,10 @@
 "use client"
 
 import { Button, Input } from "@nextui-org/react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { FaSearch } from "react-icons/fa"
+import { useRouter } from "next-nprogress-bar"
 
 export default function SearchBar() {
     const router = useRouter()

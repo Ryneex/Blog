@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { cn } from "./shadcn/utils"
 
 export function NotFound({ className, title, description, hideButtons }: { className?: string; title?: string; description?: string; hideButtons?: boolean }) {
