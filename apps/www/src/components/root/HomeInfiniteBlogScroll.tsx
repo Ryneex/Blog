@@ -5,7 +5,7 @@ import BlogCard from "@/components/BlogCard"
 import { IBlogCardInfo } from "@/types/blog"
 import { Spinner } from "@nextui-org/react"
 import { useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function HomeInfiniteBlogScroll({ initialBlogs }: { initialBlogs: IBlogCardInfo[] }) {
     const query = useSearchParams().get("q")
@@ -17,8 +17,11 @@ export default function HomeInfiniteBlogScroll({ initialBlogs }: { initialBlogs:
         const data = await getBlogsByQuery({ skip: blogs.length, query: query ?? undefined })
         if (data && data.length) return setBlogs((prev) => [...prev, ...data])
         setHasMore(false)
-        return []
     }
+
+    useEffect(() => {
+        setBlogs(initialBlogs)
+    }, [initialBlogs])
 
     return (
         <div>
